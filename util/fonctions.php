@@ -137,7 +137,7 @@ function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, pro
 	}
 }
 
-public function verifierCompteExistant($login, $mail)
+function verifierCompteExistant($login, $mail)
 	{
 		$req = $bdd->prepare("SELECT login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
 		
