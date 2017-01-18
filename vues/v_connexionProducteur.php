@@ -10,7 +10,8 @@
 			<input type='submit' value='Valider' class='btn btn-primary'>
 			<input type='reset' value='Annuler' class='btn btn-primary'>
 		</form>
-		</br>Pas de compte producteur? 
+		</br>
+		<p>Pas de compte producteur ?</p>
 		<a id='inscription_producteur' href='index.php?uc=connexionProducteur&action=formInscription'>Cliquez ici!</a>
 
 		</div>

@@ -10,7 +10,12 @@
 			<input type='submit' value='Valider' class='btn btn-primary'>
 			<input type='reset' value='Annuler' class='btn btn-primary'>
 		</form>
-		</br>Pas de compte consommateur? 
+		</br>
+		<p>Pas de compte consommateur ?</p>
 		<a id='inscription_consommateur' href='index.php?uc=connexionConsommateur&action=formInscription'>Cliquez ici!</a>
+		</br>
+		<!-- A FAIRE
+		<a href="index.php?uc=connexionConsommateur&action=formInscription">Mot de passe oublié ?</a>
+		-->
 
 		</div>
