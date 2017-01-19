@@ -35,10 +35,8 @@ switch($action)
 		}
 		else
 		{
-			if ($mdp == $mdp2)
-			{
 				$creationCompte = set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $codepostal, $ville, $mdp, 3);
-			}
+			
 		}
 		break;
 	}

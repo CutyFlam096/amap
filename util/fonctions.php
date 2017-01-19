@@ -139,6 +139,7 @@ function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, pro
 
 function verifierCompteExistant($login, $mail)
 	{
+		global $bdd;
 		$req = $bdd->prepare("SELECT login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
 		
 		$req->execute(array(
@@ -159,6 +160,7 @@ function verifierCompteExistant($login, $mail)
 	
 function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $mdp, $type)//creer un compte
 {
+	global $bdd;
 	$req = $bdd->prepare("INSERT into utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 							  Value(:nom, :prenom, :adresse, :mail, :tel, :codepostal, :ville, :mdp, :login, :type)");
 		$req->execute(array(
@@ -188,9 +190,8 @@ function creerArticleBD($description, $prix, $idCategorie)
 		));
 }
 
-//////////////////////////////////////////////////////////////
-
-function creationPanier(){
+function creationPanier()
+{
    if (!isset($_SESSION['panier'])){
       $_SESSION['panier']=array();
 	  $_SESSION['panier']['idProduit'] = array();
@@ -283,20 +284,12 @@ function modifierQTeArticle($libelleProduit,$qteProduit){
    echo "Un problème est survenu veuillez contacter l'administrateur du site.";
 }
 
-function MontantGlobal(){
+function MontantGlobal()
+{
    $total=0;
    for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
    {
       $total += $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
-   }
-   return $total;
-}
-
-function PoidGlobal(){
-   $total=0;
-   for($i = 0; $i < count($_SESSION['panier']['qteProduit']); $i++)
-   {
-      $total += $_SESSION['panier']['qteProduit'][$i];
    }
    return $total;
 }
@@ -310,6 +303,33 @@ function compterArticles()
 
 }
 
-function supprimePanier(){
+function supprimePanier()
+{
    unset($_SESSION['panier']);
+}
+
+function nouvLivraison($unIdUtil)
+{
+	global $bdd;
+	$req = $bdd->exec("INSERT INTO livraison ('id_utilisateur') VALUES (".$unIdUtil.")");
+	
+	var_dump($req);
+	var_dump($bdd->lastInsertId());
+	return $bdd->lastInsertId();
+}
+
+function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
+{
+	global $bdd;
+	$req = $bdd->prepare("INSERT INTO colis ('montanttotal','id_livraison','quantite','id_produit') VALUES (:montant, :idLiv, :qte, :idProd)");
+	
+	$req->execute(array(
+		'montant' => $montantTotal,
+		'idLiv' => $idLivraison,
+		'qte' => $quantiteProd,
+		'idProd' => $idProduit
+		)
+	);
+	
+	return true;
 }

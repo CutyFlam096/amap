@@ -1,20 +1,5 @@
 <?php
-	/**
-	$livraison = array(
-	"client" => "Fouque patrice",
-	"adresse" => "172 rue de la boustifaille"
-	
-	"colis" => array(
-		"montantGlobal" => "256421",
-		"libelle" => array(),
-		"quantite" => array()
-		)
-	)
-	**/
-	
-	//1 colis par livraison avec tous les produits dedans finaleùment :D
-	//si connectée
-	if (isset($_SESSION['id']))
+	if (isset($_SESSION['id']))//si co
 	{
 		//si panier vide
 		if (count($_SESSION['panier']['libelleProduit']) <= 0)
@@ -23,16 +8,8 @@
 		}
 		else
 		{
-			$livraison = array(
-			"client" => $_SESSION['nom']." ".$_SESSION['prenom'],
-			"adresse" => $_SESSION['adresse']." ".$_SESSION['codepostal']." ".$_SESSION['ville']
-			
-			"colis" => array(
-				"montantGlobal" => "0",
-				"libelle" => array(),
-				"quantite" => array()
-				)
-			)
+			$client = $_SESSION['nom']." ".$_SESSION['prenom'];
+			$adresse = $_SESSION['adresse']." ".$_SESSION['codepostal']." ".$_SESSION['ville'];
 		
 			$testProduits = true;
 			//pour chaque produit, verifier si sa qte est <= a celle en bdd
@@ -46,63 +23,20 @@
 			
 			if ($testProduits == true)//si tous les produits OK
 			{
-				$poid_panier = PoidGlobal();//recupere le poids de tous els produits
+				$idLivraison = nouvLivraison($_SESSION['id']);//creer la nouvelle livraison et recupere son id
 				
-				if ($poid_panier <= 25)//on fait juste 1 colis
+				echo $idLivraison;
+				$nbArticles = compterArticles();
+				for ($i=0 ;$i < $nbArticles ; $i++)//pour chaque article du panier
 				{
-					//$laLivraison['colis']['ref'] = array(); fais automatiquement en BDD
-					$laLivraison['colis']['montant'] = MontantGlobal();
+					$montantTotal = $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
+					$quantiteProd = $_SESSION['panier']['qteProduit'][$i];
+					$idProduit = $_SESSION['panier']['idProduit'][$i];
 					
-					echo $laLivraison['colis']['montant'];
-					
-					$laLivraison['colis']['produits'] = array();
-					$laLivraison['colis']['produits']['libelle'] = array();
-					$laLivraison['colis']['produits']['qte'] = array();
-						
-					for ($i=0 ;$i < count($_SESSION['panier']['libelleProduit']); $i++)
-					{
-						$libelle = $_SESSION['panier']['libelleProduit'][$i];
-						$qte = $_SESSION['panier']['qteProduit'][$i];
-						
-						array_push( $laLivraison['colis']['produits']['libelle'], $libelle);
-						array_push( $laLivraison['colis']['produits']['qte'], $qte);
-					}
-					//TEST OK
-				}
-				else//si plus de 25 produits
-				{
-					$laLivraison['colis']['produits'] = array();
-					$laLivraison['colis']['produits']['libelle'] = array();
-					$laLivraison['colis']['produits']['qte'] = array();
-
-					$placeProduits=25;
-					
-					for ($i=0 ;$i < count($_SESSION['panier']['libelleProduit']); $i++)
-					{
-						$libelle = $_SESSION['panier']['libelleProduit'][$i];
-						$qte = $_SESSION['panier']['qteProduit'][$i];
-						
-						if ($qte<placeProduits)
-						{
-							
-						}
-						
-						
-						//array_push( $laLivraison['colis']['produits']['libelle'], $libelle);
-						//array_push( $laLivraison['colis']['produits']['qte'], $qte);
-					}
-					
-					echo "> 25";
+					nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit);
 				}
 				
-				//separer en colis tous les 25kg
-				
-				//parcourir tous le panier
-					//creer un colis
-					//au bout de 25, creer un autre colis si il reste encore des produits LOOOOOOOOOOOOOOOOOOOOOOOL
-		
-				
-						
+				echo "livraison OK";
 			}
 			else
 			{
