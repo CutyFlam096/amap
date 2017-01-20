@@ -160,8 +160,8 @@ function verifierCompteExistant($login, $mail)
 
 function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $mdp, $type)//creer un compte
 {
-	global $bdd;
-	$req = $bdd->prepare("INSERT into utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
+    global $bdd;
+    $req = $bdd->prepare("INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 							  Value(:nom, :prenom, :adresse, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
 		$req->execute(array(
 		'nom' => $nom,
@@ -174,8 +174,6 @@ function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $
 		'mdp' => $mdp,
 		'login' => $login,
 		'type' => $type));
-
-		return true;
 }
 
 function creerArticleBD($description, $prix, $idCategorie)
@@ -192,12 +190,13 @@ function creerArticleBD($description, $prix, $idCategorie)
 
 function creationPanier()
 {
-   if (!isset($_SESSION['panier'])){
+   if (!isset($_SESSION['panier']))
+   {
       $_SESSION['panier']=array();
-	  $_SESSION['panier']['idProduit'] = array();
+      $_SESSION['panier']['idProduit'] = array();
       $_SESSION['panier']['libelleProduit'] = array();
-	  $_SESSION['panier']['descriptionProduit'] = array();
-	  $_SESSION['panier']['prixProduit'] = array();
+      $_SESSION['panier']['descriptionProduit'] = array();
+      $_SESSION['panier']['prixProduit'] = array();
       $_SESSION['panier']['qteProduit'] = array();
    }
    return true;
