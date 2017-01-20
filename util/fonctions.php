@@ -1,4 +1,40 @@
 <?php
+class GSBClientele
+{
+      	private static $serveur='mysql:host=localhost';
+      	private static $bdd='dbname=gsb_clientele';
+      	private static $user='root' ;
+      	private static $mdp='' ;
+		private static $monPdo;
+		private static $monGSBClientele = null;
+/**
+ * Constructeur privé, crée l'instance de PDO qui sera sollicitée
+ * pour toutes les méthodes de la classe
+ */
+	private function __construct()
+	{
+    		GSBClientele::$monPdo = new PDO(GSBClientele::$serveur.';'.GSBClientele::$bdd, GSBClientele::$user, GSBClientele::$mdp);
+			GSBClientele::$monPdo->query("SET CHARACTER SET utf8");
+	}
+	public function _destruct()
+	{
+		GSBClientele::$monPdo = null;
+	}
+/**
+ * Fonction statique qui crée l'unique instance de la classe
+ *
+ * Appel : $instanceGSBClientele = GSBClientele::getGSBClientele();
+ * @return l'unique objet de la classe GSBClientele
+ */
+	public static function getGSBClientele()
+	{
+		if(GSBClientele::$monGSBClientele == null)
+		{
+			GSBClientele::$monGSBClientele= new GSBClientele();
+		}
+		return GSBClientele::$monGSBClientele;
+	}
+
 include_once("connexion_sql.php");
 
 function get_categ() //Donne les categorie de produit a afficher dans le nav
