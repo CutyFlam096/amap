@@ -9,18 +9,18 @@ switch($action)
 		break;
 	}
 	case 'inscription' :
-	{	
+	{
 		$login = $_POST['login_producteur'];
 		$nom = $_POST['nom_producteur'];
 		$prenom = $_POST['prenom_producteur'];
 		$adresse = $_POST['adresse_producteur'];
 		$mail = $_POST['mail_producteur'];
 		$tel = $_POST['tel_producteur'];
-		$codepostal = $_POST['code_postal_producteur'];
+		$codePostal = $_POST['code_postal_producteur'];
 		$ville = $_POST['ville_producteur'];
 		$mdp = $_POST['mdp_producteur'];
 		$mdp2 = $_POST['mdp_producteur2'];
-  
+
 		if (verifierCompteExistant($login, $mail))
 		{
 			$_SESSION['alreadyExists'] = true;
@@ -35,8 +35,8 @@ switch($action)
 		}
 		else
 		{
-				$creationCompte = set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $codepostal, $ville, $mdp, 3);
-			
+				$creationCompte = set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $codepostal, $ville, $mdp, 2);
+
 		}
 		break;
 	}
@@ -46,5 +46,5 @@ switch($action)
 		break;
 	}
 }
-?>	
+?>
 </div>

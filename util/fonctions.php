@@ -3,7 +3,7 @@ include_once("connexion_sql.php");
 
 function get_categ() //Donne les categorie de produit a afficher dans le nav
 {
-    global $bdd;   
+    global $bdd;
     $req = $bdd->prepare('SELECT id, libelle FROM categorie ORDER BY libelle');
     $req->execute();
     $categories = $req->fetchAll();
@@ -13,17 +13,17 @@ function get_categ() //Donne les categorie de produit a afficher dans le nav
 function get_produit($uneCateg) //donne tous les produit ou seulement ceux d'une categ
 {
     global $bdd;
-	$uneCateg = (int) $uneCateg; 
-	
+	$uneCateg = (int) $uneCateg;
+
 	if($uneCateg==0)
 	{$req = 'SELECT * FROM produit ORDER BY libelle';}
-	
+
 	else
 	{$req = "SELECT * FROM produit WHERE produit.id_categorie = '".$uneCateg."' ORDER BY libelle";}
 	$req = $bdd->prepare($req);
     $req->execute();
     $produits = $req->fetchAll();
-    
+
     return $produits;
 }
 
@@ -42,61 +42,61 @@ function verifQteProduit($libelle, $qte)
 	{
 		return true;
 	}
-	
+
 }
 
 function get_produitProducteur($unId) //donne tous les produit ou seulement ceux d'une categ
 {
     global $bdd;
-	$unId = (int) $unId; 
-	
+	$unId = (int) $unId;
+
 	$req = "SELECT * FROM produit WHERE produit.id_utilisateur = '".$unId."' ORDER BY libelle";
 	$req = $bdd->prepare($req);
     $req->execute();
     $produits = $req->fetchAll();
-    
+
     return $produits;
 }
 
 function set_param_compte($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login, $newMdp)
 {
 	global $bdd;
-	$req = $bdd->prepare('UPDATE utilisateur 
-						SET nom= :nom, 
-						prenom= :prenom, 
-						adresse= :adresse, 
+	$req = $bdd->prepare('UPDATE utilisateur
+						SET nom= :nom,
+						prenom= :prenom,
+						adresse= :adresse,
 						mail= :mail,
-						tel= :tel, 
-						codepostal= :codepostal, 
-						ville= :ville, 
-						mdp= :mdp, 
+						tel= :tel,
+						codepostal= :codepostal,
+						ville= :ville,
+						mdp= :mdp,
 						login= :login
 						WHERE id= :id');
 
 	$req->execute(array(
-		'nom' => $nom, 
-		'prenom' => $prenom, 
-		'adresse' => $adresse, 
+		'nom' => $nom,
+		'prenom' => $prenom,
+		'adresse' => $adresse,
 		'mail' => $mail,
-		'tel' => $tel, 
-		'codepostal' => $cp, 
-		'ville' => $ville, 
-		'mdp' => $newMdp, 
+		'tel' => $tel,
+		'codepostal' => $cp,
+		'ville' => $ville,
+		'mdp' => $newMdp,
 		'login' => $login,
 		'id' => $id
 	));
-	
+
 	$_SESSION['id'] = $id;
-	$_SESSION['nom'] = $nom; 
-	$_SESSION['prenom'] = $prenom; 
-	$_SESSION['adresse'] = $adresse; 
-	$_SESSION['mail'] = $mail; 
-	$_SESSION['tel'] = $tel; 
-	$_SESSION['codepostal'] = $cp; 
-	$_SESSION['ville'] = $ville; 
-	$_SESSION['mdp'] = $newMdp; 
-	$_SESSION['login'] = $login; 
-		
+	$_SESSION['nom'] = $nom;
+	$_SESSION['prenom'] = $prenom;
+	$_SESSION['adresse'] = $adresse;
+	$_SESSION['mail'] = $mail;
+	$_SESSION['tel'] = $tel;
+	$_SESSION['codepostal'] = $cp;
+	$_SESSION['ville'] = $ville;
+	$_SESSION['mdp'] = $newMdp;
+	$_SESSION['login'] = $login;
+
 	return true;
 }
 
@@ -104,36 +104,36 @@ function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, pro
 {
     global $bdd;
 	$req = $bdd->prepare('SELECT * FROM utilisateur WHERE login= :login AND mdp = :mdp');
-	
+
 	$req->execute(array(
 	'login' => $unLogin,
 	'mdp' => $unMdp
 	));
-	
+
     $utilisateur = $req->fetch(PDO::FETCH_ASSOC);
-    
+
 	$MonMembreExiste = $req->rowCount();
-	
+
 	if ($MonMembreExiste == 0)
 	{
 		//si pas de compte
-		return false; 
+		return false;
 	}
     else
 	{
 		//si ok
 		$_SESSION['id'] = $utilisateur['id'];
-		$_SESSION['nom'] = $utilisateur['nom']; 
-		$_SESSION['prenom'] = $utilisateur['prenom']; 
-		$_SESSION['adresse'] = $utilisateur['adresse']; 
-		$_SESSION['mail'] = $utilisateur['mail']; 
-		$_SESSION['tel'] = $utilisateur['tel']; 
-		$_SESSION['codepostal'] = $utilisateur['codepostal']; 
-		$_SESSION['ville'] = $utilisateur['ville']; 
-		$_SESSION['mdp'] = $utilisateur['mdp']; 
-		$_SESSION['login'] = $utilisateur['login']; 
-		$_SESSION['id_Type_utilisateur'] = $utilisateur['id_Type_utilisateur']; 
-		return true; 
+		$_SESSION['nom'] = $utilisateur['nom'];
+		$_SESSION['prenom'] = $utilisateur['prenom'];
+		$_SESSION['adresse'] = $utilisateur['adresse'];
+		$_SESSION['mail'] = $utilisateur['mail'];
+		$_SESSION['tel'] = $utilisateur['tel'];
+		$_SESSION['codepostal'] = $utilisateur['codepostal'];
+		$_SESSION['ville'] = $utilisateur['ville'];
+		$_SESSION['mdp'] = $utilisateur['mdp'];
+		$_SESSION['login'] = $utilisateur['login'];
+		$_SESSION['id_Type_utilisateur'] = $utilisateur['id_Type_utilisateur'];
+		return true;
 	}
 }
 
@@ -141,7 +141,7 @@ function verifierCompteExistant($login, $mail)
 	{
 		global $bdd;
 		$req = $bdd->prepare("SELECT login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
-		
+
 		$req->execute(array(
 			'login' => $login,
 			'mail' => $mail
@@ -157,32 +157,32 @@ function verifierCompteExistant($login, $mail)
 		return $existant;
 	}
 
-	
+
 function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $mdp, $type)//creer un compte
 {
 	global $bdd;
 	$req = $bdd->prepare("INSERT into utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
-							  Value(:nom, :prenom, :adresse, :mail, :tel, :codepostal, :ville, :mdp, :login, :type)");
+							  Value(:nom, :prenom, :adresse, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
 		$req->execute(array(
 		'nom' => $nom,
 		'prenom' => $prenom,
 		'adresse' => $adresse,
 		'mail' => $mail,
 		'tel' => $tel,
-		'codepostal' => $codepostal,
+		'codePostal' => $codePostal,
 		'ville' => $ville,
 		'mdp' => $mdp,
 		'login' => $login,
 		'type' => $type));
-		
+
 		return true;
 }
 
 function creerArticleBD($description, $prix, $idCategorie)
 {
-	$req = $bdd->prepare("INSERT INTO produit(description, prix, idCategorie) 
+	$req = $bdd->prepare("INSERT INTO produit(description, prix, idCategorie)
 	VALUES(:description, :prix, :idCategorie)");
-	
+
 	$req->execute(array(
 		'description' => $description,
 		'prix' => $prix,
@@ -312,7 +312,7 @@ function nouvLivraison($unIdUtil)
 {
 	global $bdd;
 	$req = $bdd->exec("INSERT INTO livraison ('id_utilisateur') VALUES (".$unIdUtil.")");
-	
+
 	var_dump($req);
 	var_dump($bdd->lastInsertId());
 	return $bdd->lastInsertId();
@@ -322,7 +322,7 @@ function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 {
 	global $bdd;
 	$req = $bdd->prepare("INSERT INTO colis ('montanttotal','id_livraison','quantite','id_produit') VALUES (:montant, :idLiv, :qte, :idProd)");
-	
+
 	$req->execute(array(
 		'montant' => $montantTotal,
 		'idLiv' => $idLivraison,
@@ -330,6 +330,6 @@ function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 		'idProd' => $idProduit
 		)
 	);
-	
+
 	return true;
 }
