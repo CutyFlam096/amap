@@ -198,7 +198,7 @@ class AMAP
 			'adresse' => $adresse,
 			'mail' => $mail,
 			'tel' => $tel,
-			'codePostal' => $codePostal,
+			'codePostal' => $cp,
 			'ville' => $ville,
 			'mdp' => $mdp,
 			'login' => $login,
