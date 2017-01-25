@@ -12,12 +12,12 @@ class AMAP
 	 * Constructeur privé, crée l'instance de PDO qui sera sollicitée
 	 * pour toutes les méthodes de la classe
 	 */
-	private public static function __construct()
+	private function __construct()
 	{
     		AMAP::$monPdo = new PDO(AMAP::$serveur.';'.AMAP::$bdd, AMAP::$user, AMAP::$mdp);
 			AMAP::$monPdo->query("SET CHARACTER SET utf8");
 	}
-	public public static function _destruct()
+	public function _destruct()
 	{
 		AMAP::$monPdo = null;
 	}
@@ -37,9 +37,7 @@ class AMAP
 		return AMAP::$monAMAP;
 	}
 
-	include_once("connexion_sql.php");
-
-	public static function get_categ() //Donne les categorie de produit a afficher dans le nav
+	public function get_categ() //Donne les categorie de produit a afficher dans le nav
 	{
 	    $req = AMAP::$monPdo->prepare('SELECT id, libelle FROM categorie ORDER BY libelle');
 	    $req->execute();
@@ -47,7 +45,7 @@ class AMAP
 	    return $categories;
 	}
 
-	public static function get_produit($uneCateg) //donne tous les produit ou seulement ceux d'une categ
+	public function get_produit($uneCateg) //donne tous les produit ou seulement ceux d'une categ
 	{
 	    $uneCateg = (int) $uneCateg;
 
@@ -63,7 +61,7 @@ class AMAP
 	    return $produits;
 	}
 
-	public static function verifQteProduit($libelle, $qte)
+	public function verifQteProduit($libelle, $qte)
 	{
 		$req = "SELECT * FROM produit WHERE libelle = '".$libelle."'";
 		$req = AMAP::$monPdo->prepare($req);
@@ -80,7 +78,7 @@ class AMAP
 
 	}
 
-	public static function get_produitProducteur($unId) //donne tous les produit ou seulement ceux d'une categ
+	public function get_produitProducteur($unId) //donne tous les produit ou seulement ceux d'une categ
 	{
 	    $unId = (int) $unId;
 
@@ -92,7 +90,7 @@ class AMAP
 	    return $produits;
 	}
 
-	public static function set_param_compte($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login, $newMdp)
+	public function set_param_compte($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login, $newMdp)
 	{
 		$req = AMAP::$monPdo->prepare('UPDATE utilisateur
 							SET nom= :nom,
@@ -133,7 +131,7 @@ class AMAP
 		return true;
 	}
 
-	public static function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, producteur ou admib
+	public function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, producteur ou admib
 	{
 	    $req = AMAP::$monPdo->prepare('SELECT * FROM utilisateur WHERE login= :login AND mdp = :mdp');
 
@@ -169,27 +167,27 @@ class AMAP
 		}
 	}
 
-		public static function verifierCompteExistant($login, $mail)
+	public function verifierCompteExistant($login, $mail)
+	{
+		$req = AMAP::$monPdo->prepare("SELECT login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
+
+		$req->execute(array(
+			'login' => $login,
+			'mail' => $mail
+			));
+
+		$existant=false;
+
+		if ( $req->fetch() )
 		{
-			$req = AMAP::$monPdo->prepare("SELECT login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
-
-			$req->execute(array(
-				'login' => $login,
-				'mail' => $mail
-				));
-
-			$existant=false;
-
-			if ( $req->fetch() )
-			{
-				$existant = true;
-			}
-
-			return $existant;
+			$existant = true;
 		}
 
+		return $existant;
+	}
 
-	public static function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $mdp, $type)//creer un compte
+
+	public function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $mdp, $type)//creer un compte
 	{
 	    $req = AMAP::$monPdo->prepare("INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 								  Value(:nom, :prenom, :adresse, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
@@ -207,7 +205,7 @@ class AMAP
 			'type' => $type));
 	}
 
-	public static function creerArticleBD($description, $prix, $idCategorie)
+	public function creerArticleBD($description, $prix, $idCategorie)
 	{
 		$req = AMAP::$monPdo->prepare("INSERT INTO produit(description, prix, idCategorie)
 		VALUES(:description, :prix, :idCategorie)");
@@ -219,7 +217,7 @@ class AMAP
 			));
 	}
 
-	public static function creationPanier()
+	public function creationPanier()
 	{
 	   if (!isset($_SESSION['panier']))
 	   {
@@ -233,8 +231,8 @@ class AMAP
 	   return true;
 	}
 
-	public static function ajouterArticle($idProduit,$libelleProduit,$descriptionProduit,$qteProduit,$prixProduit){
-
+	public function ajouterArticle($idProduit,$libelleProduit,$descriptionProduit,$qteProduit,$prixProduit)
+	{
 	   //Si le panier existe
 	   if (creationPanier())
 	   {
@@ -259,7 +257,8 @@ class AMAP
 	   echo "Un problème est survenu veuillez contacter l'administrateur du site.";
 	}
 
-	public static function supprimerArticle($libelleProduit){
+	public function supprimerArticle($libelleProduit)
+	{
 	   //Si le panier existe
 	   if (creationPanier())
 	   {
@@ -292,7 +291,8 @@ class AMAP
 	   echo "Un problème est survenu veuillez contacter l'administrateur du site.";
 	}
 
-	public static function modifierQTeArticle($libelleProduit,$qteProduit){
+	public function modifierQTeArticle($libelleProduit,$qteProduit)
+	{
 	   //Si le panier éxiste
 	   if (creationPanier())
 	   {
@@ -314,7 +314,7 @@ class AMAP
 	   echo "Un problème est survenu veuillez contacter l'administrateur du site.";
 	}
 
-	public static function MontantGlobal()
+	public function MontantGlobal()
 	{
 	   $total=0;
 	   for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
@@ -324,7 +324,7 @@ class AMAP
 	   return $total;
 	}
 
-	public static function compterArticles()
+	public function compterArticles()
 	{
 	   if (isset($_SESSION['panier']))
 	   return count($_SESSION['panier']['libelleProduit']);
@@ -333,12 +333,12 @@ class AMAP
 
 	}
 
-	public static function supprimePanier()
+	public function supprimePanier()
 	{
 	   unset($_SESSION['panier']);
 	}
 
-	public static function nouvLivraison($unIdUtil)
+	public function nouvLivraison($unIdUtil)
 	{
 		$req = GSBClientele::$monPdo->exec("INSERT INTO livraison ('id_utilisateur') VALUES (".$unIdUtil.")");
 
@@ -347,7 +347,7 @@ class AMAP
 		return $bdd->lastInsertId();
 	}
 
-	public static function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
+	public function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 	{
 		$req = AMAP::$monPdo->prepare("INSERT INTO colis ('montanttotal','id_livraison','quantite','id_produit') VALUES (:montant, :idLiv, :qte, :idProd)");
 
@@ -362,3 +362,4 @@ class AMAP
 		return true;
 	}
 }
+?>

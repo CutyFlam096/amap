@@ -1,9 +1,11 @@
 <?php
 session_start();
   
-include_once('util/connexion_sql.php');
 include_once('util/fonctions.php');
-$categories = get_categ();
+
+$pdo = AMAP::getAMAP();
+
+$categories = $pdo->get_categ();
 
 include_once('vues/v_entete.php');//entete pour toutes les pages
 include_once('vues/v_bandeau.php');//donne un menu different si on est connecté
@@ -16,8 +18,6 @@ else
 {
 	$uc = $_REQUEST['uc'];
 }
-
-$pdo = GSBClientele::getGSBClientele();
 	
 switch($uc)
 {
@@ -39,8 +39,6 @@ switch($uc)
 		{include("controleurs/c_deconnection.php");break;}
 	case 'infoCompte' :
 		{include("controleurs/c_infosCompte.php");break;}
-	/*case 'creationCompte' :
-		{include("controleurs/c_creationCompte.php");break;}*/
 	case 'passerCommande' :
 		{include("controleurs/c_commande.php");break;}
 	case 'ajout' :
