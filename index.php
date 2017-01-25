@@ -15,7 +15,9 @@ if(!isset($_REQUEST['uc']))
 else
 {
 	$uc = $_REQUEST['uc'];
-}	
+}
+
+$pdo = GSBClientele::getGSBClientele();
 	
 switch($uc)
 {

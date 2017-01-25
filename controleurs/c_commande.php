@@ -18,15 +18,15 @@
 				$libelle = $_SESSION['panier']['libelleProduit'][$i];
 				$qte = $_SESSION['panier']['qteProduit'][$i];
 				
-				$testProduits = verifQteProduit($libelle, $qte);
+				$testProduits = $pdo->verifQteProduit($libelle, $qte);
 			}
 			
 			if ($testProduits == true)//si tous les produits OK
 			{
-				$idLivraison = nouvLivraison($_SESSION['id']);//creer la nouvelle livraison et recupere son id
+				$idLivraison = $pdo->nouvLivraison($_SESSION['id']);//creer la nouvelle livraison et recupere son id
 				
 				echo $idLivraison;
-				$nbArticles = compterArticles();
+				$nbArticles = $pdo->compterArticles();
 				for ($i=0 ;$i < $nbArticles ; $i++)//pour chaque article du panier
 				{
 					$montantTotal = $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];

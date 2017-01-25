@@ -1,3 +1,3 @@
 <?php
-	$produits = get_produit($_SESSION['id']);
+	$produits = $pdo->get_produit($_SESSION['id']);
 ?>

@@ -1,14 +1,14 @@
 <?php
-	$categories = get_categ();
+	$categories = $pdo->get_categ();
 	
 	if (!isset($_REQUEST['categ']))
 	{
-		$produits = get_produit(0);
+		$produits = $pdo->get_produit(0);
 	}
 	
 	else
 	{
-		$produits = get_produit($_REQUEST['categ']);
+		$produits = $pdo->get_produit($_REQUEST['categ']);
 	}
 	include('vues/v_voirProduits.php');
 	

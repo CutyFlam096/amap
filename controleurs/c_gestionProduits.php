@@ -41,7 +41,7 @@ switch($action)
 		$description=$_REQUEST['description'];
 		$prix=$_REQUEST['prix'];
 		$idCategorie=$_REQUEST['categorie'];
-		creerArticleBD($description, $prix, $idCategorie);
+		$pdo->creerArticleBD($description, $prix, $idCategorie);
 		header("location: index.php?uc=voirProduits&categorie=com&action=voirProduits");
 		break;
 	}

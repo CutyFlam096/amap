@@ -5,16 +5,16 @@ include('../util/fonctions.php');
 
 if (isset($_GET['login_consommateur'])) 
 {
-  $test_compte = set_connexion($_GET['login_consommateur'], $_GET['mdp_consommateur']);
+  $test_compte = $pdo->set_connexion($_GET['login_consommateur'], $_GET['mdp_consommateur']);
 } 
 elseif (isset($_GET['login_producteur']))
 {
-  $test_compte = set_connexion($_GET['login_producteur'], $_GET['mdp_producteur']);;
+  $test_compte = $pdo->set_connexion($_GET['login_producteur'], $_GET['mdp_producteur']);;
 }
 
 
 
-if ($test_compte == true)
+if ( $test_compte )
 {
 	/**
 	echo $_SESSION['nom']."</br>"; 

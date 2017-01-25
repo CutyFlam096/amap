@@ -17,8 +17,8 @@ if ($_REQUEST['action'] == "modif")
 	if ($ancien_mdputil == $_SESSION['mdp'] && $nouvmdp_util == $nouvmdp2_util)
 	{
 		echo "MDP ok";
-		$change_param = set_param_compte($id, $nom_util, $prenom_util, $adresse_util, $mail_util, $tel_util, $cp_util, $ville_util, $login_util, $nouvmdp_util);
-		if ($change_param == true)
+		$change_param = $pdo->set_param_compte($id, $nom_util, $prenom_util, $adresse_util, $mail_util, $tel_util, $cp_util, $ville_util, $login_util, $nouvmdp_util);
+		if ( $change_param )
 		{
 			echo "changement parametre comtpe ok";
 		}

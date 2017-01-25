@@ -1,4 +1,3 @@
-<div class='container'>
 <?php
 $action = $_REQUEST['action'];
 switch($action)
@@ -21,7 +20,9 @@ switch($action)
 		$mdp = $_POST['mdp_producteur'];
 		$mdp2 = $_POST['mdp_producteur2'];
 
-		if (verifierCompteExistant($login, $mail))
+		$creation = $pdo->verifierCompteExistant($login, $mail);
+
+		if ( $creation )
 		{
 			$_SESSION['alreadyExists'] = true;
 
@@ -35,7 +36,7 @@ switch($action)
 		}
 		else
 		{
-				$creationCompte = set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $codepostal, $ville, $mdp, 2);
+				$pdo->set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $codepostal, $ville, $mdp, 2);
 
 		}
 		break;
@@ -47,4 +48,3 @@ switch($action)
 	}
 }
 ?>
-</div>

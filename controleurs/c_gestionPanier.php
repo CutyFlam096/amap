@@ -4,17 +4,17 @@ if($_REQUEST['action'] == "voir")
 {
 	include("vues/v_panier.php");
 }
-elseif($_REQUEST['action'] == "supprimer")
+else if($_REQUEST['action'] == "supprimer")
 {
-	supprimerArticle($_REQUEST['libelleProduit']);
+	$pdo->supprimerArticle($_REQUEST['libelleProduit']);
 	include("vues/v_panier.php"); //retourne sur le panier
 }
 elseif($_REQUEST['action'] == "viderPanier")
 {
-	supprimePanier();
+	$pdo->supprimePanier();
 	include("vues/v_panier.php"); //retourne sur le panier
 }
-elseif($_REQUEST['action'] == "ajouter")
+else if($_REQUEST['action'] == "ajouter")
 {
 	/**
 	echo $_REQUEST['idProduit'];
@@ -22,12 +22,12 @@ elseif($_REQUEST['action'] == "ajouter")
  	echo $_REQUEST['libelleProduit'];
 	echo $_REQUEST['prixProduit'];
 	**/
-	ajouterArticle($_REQUEST['idProduit'],$_REQUEST['libelleProduit'],$_REQUEST['descriptionProduit'],$_POST['qte_produit'],$_REQUEST['prixProduit']);
+	$pdo->ajouterArticle($_REQUEST['idProduit'],$_REQUEST['libelleProduit'],$_REQUEST['descriptionProduit'],$_POST['qte_produit'],$_REQUEST['prixProduit']);
 	include("vues/v_panier.php"); //retourne sur le panier
 }
-elseif($_REQUEST['action'] == "modifier")
+else if($_REQUEST['action'] == "modifier")
 {
-	modifierQTeArticle($_REQUEST['libelleProduit'],$_POST['quantiteProd']);
+	$pdo->modifierQTeArticle($_REQUEST['libelleProduit'],$_POST['quantiteProd']);
 	include("vues/v_panier.php"); //retourne sur le panier
 }
 
