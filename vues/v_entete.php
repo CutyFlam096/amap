@@ -7,9 +7,13 @@
         
         <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> 
         <link href="css/style.css" rel="stylesheet" type="text/css" /> 
+		<link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css" />
         
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
         <script src="js/script.js"></script>
         <script src="js/modificationInfosCompte.js"></script>
+		<script src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+		<script src="js/datepicker-fr.js"></script>
+		<script src="js/calendrier.js"></script>
     </head>

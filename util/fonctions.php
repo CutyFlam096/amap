@@ -340,15 +340,18 @@ class AMAP
 
 	public function nouvLivraison($unIdUtil)
 	{
-		$req = GSBClientele::$monPdo->exec("INSERT INTO livraison ('id_utilisateur') VALUES (".$unIdUtil.")");
+		/**
+		$req = AMAP::$monPdo->exec("INSERT INTO livraison ('id_utilisateur') VALUES (".$unIdUtil.")");
 
 		var_dump($req);
 		var_dump($bdd->lastInsertId());
 		return $bdd->lastInsertId();
+		**/
 	}
 
 	public function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 	{
+		/**
 		$req = AMAP::$monPdo->prepare("INSERT INTO colis ('montanttotal','id_livraison','quantite','id_produit') VALUES (:montant, :idLiv, :qte, :idProd)");
 
 		$req->execute(array(
@@ -358,6 +361,7 @@ class AMAP
 			'idProd' => $idProduit
 			)
 		);
+		**/
 
 		return true;
 	}

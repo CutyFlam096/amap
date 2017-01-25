@@ -63,7 +63,7 @@
 					<form method='post' action='index.php?uc=gestionPanier&action=viderPanier'>
 						<input class='form-control' type='submit' value='Vider panier'>
 					 </form>
-					 <form method='post' action='index.php?uc=passerCommande'>
+					 <form method='post' action='index.php?uc=passerCommande&action=choisirDate'>
 						<input class='form-control' type='submit' value='Passer commande'>
 					 </form>";
 

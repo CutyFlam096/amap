@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 18 Janvier 2017 à 15:13
+-- Généré le :  Mer 25 Janvier 2017 à 15:53
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -75,6 +75,8 @@ INSERT INTO `colis` (`ref`, `montanttotal`, `id_livraison`, `quantite`, `id_Prod
 CREATE TABLE IF NOT EXISTS `livraison` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateur` int(11) DEFAULT NULL,
+  `dateCreation` date NOT NULL,
+  `dateLivraison` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_livraison_id_utilisateur` (`id_utilisateur`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
@@ -83,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `livraison` (
 -- Contenu de la table `livraison`
 --
 
-INSERT INTO `livraison` (`id`, `id_utilisateur`) VALUES
-(1, 3),
-(2, 3);
+INSERT INTO `livraison` (`id`, `id_utilisateur`, `dateCreation`, `dateLivraison`) VALUES
+(1, 3, '0000-00-00', 0),
+(2, 3, '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -187,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `adresse`, `mail`, `tel`, `codepostal`, `ville`, `mdp`, `login`, `id_Type_utilisateur`) VALUES
 (1, 'Fouque', 'Patrice', '52 rue jesaispas', 'jesaispas@gmail.com', 631313131, 45000, 'Orléans', 'mdp', 'Patrice', 1),
 (2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', 632323232, 45000, 'Orlï¿½ans', 'mdp', 'Robin', 2),
-(3, 'Benardeau', 'Quentin', '54 rue jesaispas', 'jesaispas@gmail.com', 633333333, 45000, 'Orlï¿½ans', 'mdp', 'Quentin', 3);
+(3, 'Benardeau', 'Quentin', '54 rue jesaispas', 'jesaispas@gmail.com', 633333333, 45000, 'Saran', 'mdp', 'Quentin', 3);
 
 --
 -- Contraintes pour les tables exportées
@@ -197,8 +199,8 @@ INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `adresse`, `mail`, `tel`, `cod
 -- Contraintes pour la table `colis`
 --
 ALTER TABLE `colis`
-  ADD CONSTRAINT `FK_colis_id_Produit` FOREIGN KEY (`id_Produit`) REFERENCES `produit` (`id`),
-  ADD CONSTRAINT `FK_colis_id` FOREIGN KEY (`id_livraison`) REFERENCES `livraison` (`id`);
+  ADD CONSTRAINT `FK_colis_id` FOREIGN KEY (`id_livraison`) REFERENCES `livraison` (`id`),
+  ADD CONSTRAINT `FK_colis_id_Produit` FOREIGN KEY (`id_Produit`) REFERENCES `produit` (`id`);
 
 --
 -- Contraintes pour la table `livraison`
@@ -217,8 +219,8 @@ ALTER TABLE `produit`
 -- Contraintes pour la table `ravitailler`
 --
 ALTER TABLE `ravitailler`
-  ADD CONSTRAINT `FK_ravitailler_id_utilisateur` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `FK_ravitailler_id` FOREIGN KEY (`id`) REFERENCES `produit` (`id`);
+  ADD CONSTRAINT `FK_ravitailler_id` FOREIGN KEY (`id`) REFERENCES `produit` (`id`),
+  ADD CONSTRAINT `FK_ravitailler_id_utilisateur` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `utilisateur`
