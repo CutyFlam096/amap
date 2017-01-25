@@ -47,7 +47,7 @@
 		<div class='form-group'>
 		<form method='POST' action='index.php?uc=connexionConsommateur&action=inscription'>
 				<label for='login_consommateur'>Login</label>
-				<input name='login_consommateur' id='login_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkLogin()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
+				<input name='login_consommateur' id='login_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkLogin()">
 				
 				<label for='nom_consommateur'>Nom</label>
 				<input name='nom_consommateur' id='nom_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkLastName()">
@@ -59,7 +59,7 @@
 				<input name='adresse_consommateur' id='adresse_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkAdresse()">
 				
 				<label for='mail_consommateur'>Mail</label>
-				<input name='mail_consommateur' id='mail_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkMail()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
+				<input name='mail_consommateur' id='mail_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkMail()">
 				
 				<label for='tel_consommateur'>Tel</label>
 				<input name='tel_consommateur' id='tel_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkTel()">
