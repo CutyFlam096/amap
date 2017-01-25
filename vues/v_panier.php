@@ -3,7 +3,7 @@
 		
 
 		<?php
-		if (creationPanier())
+		if ($pdo->creationPanier())
 		{
 			$nbArticles=count($_SESSION['panier']['libelleProduit']);
 			if ($nbArticles <= 0)
@@ -54,7 +54,7 @@
 
 				echo "<td colspan='3'>";
 				echo "Nombre d'article(s) : ".$nbArticles.
-				".</br>Total : ".MontantGlobal()." euro(s).";
+				".</br>Total : ".$pdo->MontantGlobal()." euro(s).";
 				echo "</td>";
 				
 				

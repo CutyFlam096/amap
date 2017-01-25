@@ -234,7 +234,7 @@ class AMAP
 	public function ajouterArticle($idProduit,$libelleProduit,$descriptionProduit,$qteProduit,$prixProduit)
 	{
 	   //Si le panier existe
-	   if (creationPanier())
+	   if (AMAP::creationPanier())
 	   {
 	      //Si le produit existe déjà on ajoute seulement la quantité
 	      $positionProduit = array_search($libelleProduit,  $_SESSION['panier']['libelleProduit']);
@@ -260,7 +260,7 @@ class AMAP
 	public function supprimerArticle($libelleProduit)
 	{
 	   //Si le panier existe
-	   if (creationPanier())
+	   if (amap::creationPanier())
 	   {
 	      //Nous allons passer par un panier temporaire
 	      $tmp=array();
@@ -294,7 +294,7 @@ class AMAP
 	public function modifierQTeArticle($libelleProduit,$qteProduit)
 	{
 	   //Si le panier éxiste
-	   if (creationPanier())
+	   if (amap::creationPanier())
 	   {
 	      //Si la quantité est positive on modifie sinon on supprime l'article
 	      if ($qteProduit > 0)
