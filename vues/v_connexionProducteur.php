@@ -1,6 +1,6 @@
 <div class='form-group'>
 	
-		<form method='get' action='controleurs/c_verifConnexion.php'>
+		<form method='POST' action='index.php?uc=connexionProducteur&action=verifConnexion'>
 			<label for='login_producteur'>Login</label>
 			<input name='login_producteur' id='login_producteur' type='text' class='form-control' size='30' maxlength='45' />
 			

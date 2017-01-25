@@ -2,7 +2,6 @@
 session_start();
   
 include_once('util/fonctions.php');
-
 $pdo = AMAP::getAMAP();
 
 $categories = $pdo->get_categ();

@@ -9,11 +9,6 @@ switch($action)
 	}
 	case 'inscription' :
 	{
-		if ( isset($_SESSION['alreadyExists']) )
-		{
-			unset($_SESSION['alreadyExists']);
-		}
-
 		$login = $_POST['login_consommateur'];
 		$nom = $_POST['nom_consommateur'];
 		$prenom = $_POST['prenom_consommateur'];
@@ -49,6 +44,39 @@ switch($action)
 	{
 		include_once('vues/v_connexionConsommateur.php');
 		break;
+	}
+	
+	case 'verifConnexion':
+	{
+		if (isset($_POST['login_consommateur'])) 
+		{
+		  $test_compte = $pdo->set_connexion($_POST['login_consommateur'], $_POST['mdp_consommateur']);
+		} 
+		else if (isset($_POST['login_producteur']))
+		{
+		  $test_compte = $pdo->set_connexion($_POST['login_producteur'], $_POST['mdp_producteur']);
+		}
+
+		if ($test_compte)
+		{
+			/**
+			echo $_SESSION['nom']."</br>"; 
+			echo $_SESSION['prenom']."</br>"; 
+			echo $_SESSION['adresse']."</br>"; 
+			echo $_SESSION['mail']."</br>"; 
+			echo $_SESSION['tel']."</br>"; 
+			echo $_SESSION['codepostal']."</br>"; 
+			echo $_SESSION['ville']."</br>"; 
+			echo $_SESSION['mdp']."</br>"; 
+			echo $_SESSION['login']."</br>"; 
+			echo $_SESSION['id_Type_utilisateur']."</br>"; 
+			**/
+			header('Location: index.php');    
+		}
+		else
+		{
+			echo "Erreur mdp ou pseudo!";
+		}
 	}
 }
 ?>
