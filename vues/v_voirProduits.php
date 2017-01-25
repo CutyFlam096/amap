@@ -43,7 +43,7 @@
 										</form>
 									</div>";
 									
-								echo "<div class='col-lg-4' id='pu_produit".$produit['id']."'>Prix au kilo:".$produit['prixunitaire']." euros.</div>";
+								echo "<div class='col-lg-4' id='pu_produit".$produit['id']."'>Prix au kilo : ".$produit['prixunitaire']." euro(s).</div>";
 								echo "<div class='col-lg-4' id='quantite_produit".$produit['id']."'>".$produit['quantite']." kilogramme(s)</div>";
 							echo "</div>";
 						echo "</div>";

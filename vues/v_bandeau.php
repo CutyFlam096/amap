@@ -4,7 +4,14 @@
 				<div class="col-lg-10 ">                        
 					<img class = "imagelogo" src= "img/paysage.jpg" alt="" />
 				</div>
-				<div class="col-lg-2" ><h1>AMAP</h1></div>
+				<div class="col-lg-2" ><h1>AMAP</h1>
+				<?php
+					if(isset($_SESSION['nom']))
+					{
+						echo "<p>Vous ètes connecté en tant que ".$_SESSION['prenom']." ".$_SESSION['nom']."</p>";
+					}
+				?>
+				</div>
 			</div>
 		</div>
 		
