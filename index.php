@@ -10,13 +10,9 @@ include_once('vues/v_entete.php');//entete pour toutes les pages
 include_once('vues/v_bandeau.php');//donne un menu different si on est connecté
 
 if(!isset($_REQUEST['uc']))
-{
-	$uc = 'accueil';
-}   
+{$uc = 'accueil';}   
 else
-{
-	$uc = $_REQUEST['uc'];
-}
+{$uc = $_REQUEST['uc'];}
 	
 switch($uc)
 {

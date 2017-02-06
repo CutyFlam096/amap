@@ -6,7 +6,7 @@
 				</div>
 				<div class="col-lg-2" ><h1>AMAP</h1>
 				<?php
-					if(isset($_SESSION['nom']))
+					if(isset($_SESSION['nom']) and !isset($_SESSION['alreadyExists']) )
 					{
 						echo "<p>Vous ètes connecté en tant que ".$_SESSION['prenom']." ".$_SESSION['nom']."</p>";
 					}

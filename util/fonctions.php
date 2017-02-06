@@ -44,7 +44,31 @@ class AMAP
 	    $categories = $req->fetchAll();
 	    return $categories;
 	}
-
+	
+	public function getLivraisonDuJour()//renvoi les livraisons du jour pour la generation du fichier xml
+	{
+		$req = AMAP::$monPdo->prepare('SELECT * FROM livraison WHERE dateLivraison = CURRENT_DATE ');
+		$req->execute();
+		$livraisons = $req->fetchAll();
+		return $livraisons;
+	}
+	
+	public function getColis($idLivraison)
+	{
+		$req = AMAP::$monPdo->prepare('SELECT * FROM colis WHERE id_livraison ='.$idLivraison);
+		$req->execute();
+		$lesColis = $req->fetchAll();
+		return $lesColis;
+	}
+	
+	public function getUtil($id_util)
+	{
+		$req = AMAP::$monPdo->prepare('SELECT * FROM utilisateur WHERE id='.$id_util);
+		$req->execute();
+		$util = $req->fetch();
+		return $util;
+	}
+	
 	public function get_produit($uneCateg) //donne tous les produit ou seulement ceux d'une categ
 	{
 	    $uneCateg = (int) $uneCateg;
@@ -203,6 +227,8 @@ class AMAP
 			'mdp' => $mdp,
 			'login' => $login,
 			'type' => $type));
+			
+			return true;
 	}
 
 	public function creerArticleBD($description, $prix, $idCategorie)

@@ -51,6 +51,16 @@ switch($action)
 		if (isset($_POST['login_consommateur'])) 
 		{
 		  $test_compte = $pdo->set_connexion($_POST['login_consommateur'], $_POST['mdp_consommateur']);
+		  echo $_SESSION['nom']."</br>"; 
+			echo $_SESSION['prenom']."</br>"; 
+			echo $_SESSION['adresse']."</br>"; 
+			echo $_SESSION['mail']."</br>"; 
+			echo $_SESSION['tel']."</br>"; 
+			echo $_SESSION['codepostal']."</br>"; 
+			echo $_SESSION['ville']."</br>"; 
+			echo $_SESSION['mdp']."</br>"; 
+			echo $_SESSION['login']."</br>"; 
+			echo $_SESSION['id_Type_utilisateur']."</br>"; 
 		} 
 		else if (isset($_POST['login_producteur']))
 		{

@@ -1,3 +1,4 @@
+<div class='container'>
 <p>Inscription consommateur</p>
 <?php
 	if ( isset($_SESSION['alreadyExists']) && $_SESSION['alreadyExists'] )
@@ -83,3 +84,4 @@
 <?php
 	}
 ?>
+</div>

@@ -1,10 +1,11 @@
+<div class='container'>
 <p>Inscription producteur</p>
 <?php
 	if ( isset($_SESSION['alreadyExists']) && $_SESSION['alreadyExists'] )
 	{
 ?>
 	<div class='form-group'>
-		<form method='POST' action='index.php?uc=connexionproducteur&action=inscription'>
+		<form method='POST' action='index.php?uc=connexionProducteur&action=inscription'>
 				<label for='login_producteur'>Login</label>
 				<input name='login_producteur' id='login_producteur' type='text' class='form-control' value='' placeholder="Le login et/ou le mail que vous avez rentré précédemment existe(nt) déjà" size='30' maxlength='45' onblur="checkLogin()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
 				
@@ -45,7 +46,7 @@
 	{
 ?>
 		<div class='form-group'>
-		<form method='POST' action='index.php?uc=connexionproducteur&action=inscription'>
+		<form method='POST' action='index.php?uc=connexionProducteur&action=inscription'>
 				<label for='login_producteur'>Login</label>
 				<input name='login_producteur' id='login_producteur' type='text' class='form-control' size='30' maxlength='45' onblur="checkLogin()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
 				
@@ -83,3 +84,4 @@
 <?php
 	}
 ?>
+</div>
