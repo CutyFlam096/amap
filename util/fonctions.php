@@ -472,13 +472,63 @@ class AMAP
 		$req->execute(array(':desc' => $description,':qte' => $qte,':prix' => $prix,':id' => $id));
 	}
 	
+	public function supprimerCategorieBD ($id)
+	{	
+		$req = AMAP::$monPdo->prepare("SELECT * FROM produit where id_categorie = :idCateg");
+		$req->execute(array(':idCateg' => $id));
+		
+		$produits = $req->fetchAll();
+		
+		foreach ($produits as $produit)
+		{
+			
+			$req = AMAP::$monPdo->prepare("DELETE FROM colis where id_Produit = :idProduit");
+			$req->execute(array(':idProduit' => $produit['id']));
+			
+			amap::supprimerArticleBD($produit['id']);
+		}
+		
+		$req3 = AMAP::$monPdo->prepare("DELETE FROM categorie where id = :idCateg");
+		$req3->execute(array(':idCateg' => $id));
+	}
+	
+	public function ajouterCategorieBD($nomCateg)
+	{
+		$req = AMAP::$monPdo->prepare("INSERT INTO categorie (libelle) VALUES (:nomCateg)");
+		$req->execute(array(':nomCateg' => $nomCateg));
+		
+		return true;
+	}
+	
 	public function get_util()
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur");
-		$req->execute();
+		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur where id != :idUtil");
+		$req->execute(array(':idUtil' => $_SESSION['id']));
 		
 		$utilisateurs = $req->fetchAll();
-	    return $utilisateurs;
+		return $utilisateurs;
+	}
+	
+	public function supprimerUtilBD($id)
+	{
+		$req1 = AMAP::$monPdo->prepare("DELETE FROM livraison where id_utilisateur = :idUtil");
+		$req1->execute(array(':idUtil' => $id));
+		
+		$req1 = AMAP::$monPdo->prepare("SELECT * FROM produit where id_utilisateur = :idUtil");
+		$req1->execute(array(':idUtil' => $id));
+		
+		$produits = $req1->fetchAll();
+		
+		foreach ($produits as $produit)
+		{
+			$req2 = AMAP::$monPdo->prepare("DELETE FROM colis where id_Produit = :idProduit");
+			$req2->execute(array(':idProduit' => $produit['id']));
+			
+			amap::supprimerArticleBD($produit['id']);
+		}
+		
+		$req3 = AMAP::$monPdo->prepare("DELETE FROM utilisateur where id = :idUtil");
+		$req3->execute(array(':idUtil' => $id));
 	}
 	
 	public function getTypeUtil()
@@ -487,7 +537,7 @@ class AMAP
 		$req->execute();
 		
 		$types = $req->fetchAll();
-	    return $types;
+		return $types;
 	}
 }
 ?>
