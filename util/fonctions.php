@@ -21,11 +21,15 @@ class AMAP
 			AMAP::$monPdo->query("SET CHARACTER SET utf8");
 		}
     	catch(PDOException $e)
-		{echo 'Connexion impossible';}
+		{
+			echo 'Connexion impossible';
+		}
 	}
 	
 	public function _destruct()
-	{AMAP::$monPdo = null;}
+	{
+		AMAP::$monPdo = null;
+	}
 
 	/**
 	 * Fonction statique qui crée l'unique instance de la classe
@@ -36,14 +40,15 @@ class AMAP
 	public static function getAMAP()
 	{
 		if(AMAP::$monAMAP == null)
-		{AMAP::$monAMAP= new AMAP();}
-	
+		{
+			AMAP::$monAMAP= new AMAP();
+		}
 		return AMAP::$monAMAP;
 	}
 
 	public function get_categ() //Donne les categorie de produit a afficher dans le nav
 	{
-	    $req = AMAP::$monPdo->prepare('SELECT id, libelle FROM categorie ORDER BY id');
+	    $req = AMAP::$monPdo->prepare('SELECT id, libelle FROM categorie ORDER BY libelle');
 	    $req->execute();
 	    $categories = $req->fetchAll();
 	    return $categories;
@@ -96,14 +101,20 @@ class AMAP
 		$req -> execute();
 		$produit = $req->fetch();
 		if ($qte > $produit['quantite'])
-		{return false;}
+		{
+			return false;
+		}
 		else
-		{return true;}
+		{
+			return true;
+		}
+
 	}
 
 	public function get_produitProducteur($unId) //donne tous les produit ou seulement ceux d'une categ
 	{
 	    $unId = (int) $unId;
+
 		$req = "SELECT * FROM produit WHERE produit.id_utilisateur = '".$unId."' ORDER BY libelle";
 		$req = AMAP::$monPdo->prepare($req);
 	    $req->execute();
@@ -152,7 +163,7 @@ class AMAP
 
 		return true;
 	}
-
+	
 	public function set_param_compte_no_mdp($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login)
 	{
 		$req = AMAP::$monPdo->prepare('UPDATE utilisateur
@@ -190,7 +201,7 @@ class AMAP
 
 		return true;
 	}
-	
+
 	public function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, producteur ou admib
 	{
 	    $req = AMAP::$monPdo->prepare('SELECT * FROM utilisateur WHERE login= :login AND mdp = :mdp');
@@ -239,7 +250,9 @@ class AMAP
 		$existant=false;
 
 		if ( $req->fetch() )
-		{$existant = true;}
+		{
+			$existant = true;
+		}
 
 		return $existant;
 	}
@@ -378,10 +391,13 @@ class AMAP
 	   return count($_SESSION['panier']['libelleProduit']);
 	   else
 	   return 0;
+
 	}
 
 	public function supprimePanier()
-	{unset($_SESSION['panier']);}
+	{
+	   unset($_SESSION['panier']);
+	}
 
 	public function nouvLivraison($unIdUtil)
 	{
@@ -428,6 +444,9 @@ class AMAP
 	
 	public function nouvProduit($lib, $des, $pu, $qte, $util, $categ, $image)
 	{
+		//INSERT INTO produit (libelle,description,prixunitaire,quantite,id_utilisateur ,id_categorie, image) VALUES ('test', 'azert azertyu zer', 52, 522, 2, 2, 'img/produits/chat-boule-poil.jpg');
+		$reqq = "INSERT INTO produit (libelle,description,prixunitaire,quantite,id_utilisateur,id_categorie,image) VALUES ('".$lib."','".$des."', '".$pu."','".$qte."', '".$util."', '".$categ."', '".$image."')";
+		
 		$req = AMAP::$monPdo->prepare("INSERT INTO produit (libelle,description,prixunitaire,quantite,id_utilisateur,id_categorie,image) VALUES ('".$lib."','".$des."', '".$pu."','".$qte."', '".$util."', '".$categ."', '".$image."')");
 		$req->execute();
 		
@@ -451,74 +470,6 @@ class AMAP
 	{
 		$req = AMAP::$monPdo->prepare("UPDATE produit SET description = :desc, quantite = :qte, prixunitaire = :prix WHERE id = :id");
 		$req->execute(array(':desc' => $description,':qte' => $qte,':prix' => $prix,':id' => $id));
-	}
-	
-	public function supprimerCategorieBD ($id)
-	{	
-		$req = AMAP::$monPdo->prepare("SELECT * FROM produit where id_categorie = :idCateg");
-		$req->execute(array(':idCateg' => $id));
-		
-		$produits = $req->fetchAll();
-		
-		foreach ($produits as $produit)
-		{
-			
-			$req = AMAP::$monPdo->prepare("DELETE FROM colis where id_Produit = :idProduit");
-			$req->execute(array(':idProduit' => $produit['id']));
-			
-			amap::supprimerArticleBD($produit['id']);
-		}
-		
-		$req3 = AMAP::$monPdo->prepare("DELETE FROM categorie where id = :idCateg");
-		$req3->execute(array(':idCateg' => $id));
-	}
-	
-	public function ajouterCategorieBD($nomCateg)
-	{
-		$req = AMAP::$monPdo->prepare("INSERT INTO categorie (libelle) VALUES (:nomCateg)");
-		$req->execute(array(':nomCateg' => $nomCateg));
-		
-		return true;
-	}
-	
-	public function get_util()
-	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur where id != :idUtil");
-		$req->execute(array(':idUtil' => $_SESSION['id']));
-		
-		$utilisateurs = $req->fetchAll();
-		return $utilisateurs;
-	}
-	
-	public function supprimerUtilBD($id)
-	{
-		$req1 = AMAP::$monPdo->prepare("DELETE FROM livraison where id_utilisateur = :idUtil");
-		$req1->execute(array(':idUtil' => $id));
-		
-		$req1 = AMAP::$monPdo->prepare("SELECT * FROM produit where id_utilisateur = :idUtil");
-		$req1->execute(array(':idUtil' => $id));
-		
-		$produits = $req1->fetchAll();
-		
-		foreach ($produits as $produit)
-		{
-			$req2 = AMAP::$monPdo->prepare("DELETE FROM colis where id_Produit = :idProduit");
-			$req2->execute(array(':idProduit' => $produit['id']));
-			
-			amap::supprimerArticleBD($produit['id']);
-		}
-		
-		$req3 = AMAP::$monPdo->prepare("DELETE FROM utilisateur where id = :idUtil");
-		$req3->execute(array(':idUtil' => $id));
-	}
-	
-	public function getTypeUtil()
-	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM type_utilisateur");
-		$req->execute();
-		
-		$types = $req->fetchAll();
-		return $types;
 	}
 }
 ?>
