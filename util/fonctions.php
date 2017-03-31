@@ -153,6 +153,44 @@ class AMAP
 		return true;
 	}
 
+	public function set_param_compte_no_mdp($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login)
+	{
+		$req = AMAP::$monPdo->prepare('UPDATE utilisateur
+							SET nom= :nom,
+							prenom= :prenom,
+							adresse= :adresse,
+							mail= :mail,
+							tel= :tel,
+							codepostal= :codepostal,
+							ville= :ville,
+							login= :login
+							WHERE id= :id');
+
+		$req->execute(array(
+			'nom' => $nom,
+			'prenom' => $prenom,
+			'adresse' => $adresse,
+			'mail' => $mail,
+			'tel' => $tel,
+			'codepostal' => $cp,
+			'ville' => $ville,
+			'login' => $login,
+			'id' => $id
+		));
+
+		$_SESSION['id'] = $id;
+		$_SESSION['nom'] = $nom;
+		$_SESSION['prenom'] = $prenom;
+		$_SESSION['adresse'] = $adresse;
+		$_SESSION['mail'] = $mail;
+		$_SESSION['tel'] = $tel;
+		$_SESSION['codepostal'] = $cp;
+		$_SESSION['ville'] = $ville;
+		$_SESSION['login'] = $login;
+
+		return true;
+	}
+	
 	public function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, producteur ou admib
 	{
 	    $req = AMAP::$monPdo->prepare('SELECT * FROM utilisateur WHERE login= :login AND mdp = :mdp');
