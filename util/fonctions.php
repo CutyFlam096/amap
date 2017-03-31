@@ -471,5 +471,23 @@ class AMAP
 		$req = AMAP::$monPdo->prepare("UPDATE produit SET description = :desc, quantite = :qte, prixunitaire = :prix WHERE id = :id");
 		$req->execute(array(':desc' => $description,':qte' => $qte,':prix' => $prix,':id' => $id));
 	}
+	
+	public function get_util()
+	{
+		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur");
+		$req->execute();
+		
+		$utilisateurs = $req->fetchAll();
+	    return $utilisateurs;
+	}
+	
+	public function getTypeUtil()
+	{
+		$req = AMAP::$monPdo->prepare("SELECT * FROM type_utilisateur");
+		$req->execute();
+		
+		$types = $req->fetchAll();
+	    return $types;
+	}
 }
 ?>

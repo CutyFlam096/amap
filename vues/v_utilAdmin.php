@@ -1,8 +1,6 @@
 <div class="container">
-	<div class="row">
-					
+	<div class="row">				
 		<?php
-		$cpt = 1;
 		foreach($utilisateurs as $util)
 		{
 			echo "<div class='col-xs-12 well'>
