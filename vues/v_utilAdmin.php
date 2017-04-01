@@ -9,9 +9,8 @@
 							<span class='glyphicon glyphicon-remove-circle'></span>
 						</button>
 					</form>
-					<form method='POST' action='' class='form-group'>
-						<label for='id_util'>Id:</label>
-						<input name='id_util' id='id_util' type='text' class='form-control' value='".$util['id']."'>
+					<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=modifier' class='form-group'>
+						<input name='id_util' id='id_util' type='hidden' class='form-control' value='".$util['id']."'>
 						
 						<label for='nom_util'>Nom:</label>
 						<input name='nom_util' id='nom_util' type='text' class='form-control' value='".$util['nom']."'>
@@ -49,12 +48,14 @@
 							}
 						
 					echo "</select>
+					
+						<input name='valider' id='valider' value='Valider' type='submit' class='btn btn-primary' value='".$util['prenom']."'>
 					</form>
 				 </div>";
 		}
 		?>
 		
-		<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=ajouter'>
+		<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=formAjout'>
 			<button type='submit' class='btn btn-default btn-sm'>
 				<span class='glyphicon glyphicon-remove-circle'></span>Ajouter un utilisateur
 			</button>

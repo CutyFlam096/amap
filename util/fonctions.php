@@ -539,5 +539,57 @@ class AMAP
 		$types = $req->fetchAll();
 		return $types;
 	}
+	
+	public function modifierUtilAdminBD($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login, $type)
+	{
+		$req = AMAP::$monPdo->prepare("UPDATE utilisateur set nom = :nom, prenom = :prenom, adresse = :adresse, mail = :mail, tel = :tel, codepostal = :cp, ville = :ville, login = :login, id_Type_utilisateur = :type WHERE id = :id");
+		$req->execute(
+		array(
+			':nom' => $nom,
+			':prenom' => $prenom,
+			':adresse' => $adresse,
+			':mail' => $mail,
+			':tel' => $tel,
+			':cp' => $cp,
+			':ville' => $ville,
+			':login' => $login,
+			':type' => $type,
+			':id' => $id)
+		);
+		
+		return true;
+	}
+	
+	public function ajouterUtilBD($login, $nom, $prenom, $addr, $mail, $tel, $cp, $ville, $type, $mdp)
+	{
+		 $req = AMAP::$monPdo->prepare(
+		 "INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
+		Value(:nom, :prenom, :addr, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
+			
+			$req->execute(array(
+				':login' => $login,
+				':nom' => $nom,
+				':prenom' => $prenom,
+				':addr' => $addr,
+				':mail' => $mail,
+				':tel' => $tel,
+				':codePostal' => $cp,
+				':ville' => $ville,
+				':mdp' => $mdp,
+				':type' => $type)
+			);
+			
+			return true;
+	}
+	
+	public function get_produit_admin()
+	{
+		$req = "SELECT * FROM produit";
+		$req = AMAP::$monPdo->prepare($req);
+	    $req->execute();
+	    $produits = $req->fetchAll();
+
+	    return $produits;
+	}
 }
 ?>

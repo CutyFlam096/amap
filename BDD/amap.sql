@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 31 Mars 2017 à 15:27
+-- Généré le :  Ven 31 Mars 2017 à 13:51
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `categorie`
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `prenom` char(25) CHARACTER SET latin1 DEFAULT NULL,
   `adresse` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
   `mail` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `tel` varchar(10) NOT NULL,
+  `tel` int(11) NOT NULL,
   `codepostal` int(11) NOT NULL,
   `ville` char(100) CHARACTER SET latin1 NOT NULL,
   `mdp` varchar(50) CHARACTER SET latin1 NOT NULL,
@@ -186,11 +186,11 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `adresse`, `mail`, `tel`, `codepostal`, `ville`, `mdp`, `login`, `id_Type_utilisateur`) VALUES
-(1, 'Fouque', 'Patrice', '52 rue je sais pas ou', 'jesaispas@gmail.com', '0631313131', 45000, 'Orléans', 'mdp', 'Patrice', 1),
-(2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', '0632323232', 45000, 'Orléans', 'mdp', 'Robin', 2),
-(3, 'Benardeau', 'Quentin', '54 rue je sais pas ou', 'jesaispas@gmail.com', '0634343434', 45000, 'Orléans', 'mdp', 'Quentin', 3),
-(4, 'testtest', 'testtest', 'testtest', 'testtest@testtest.testtest', '0631313131', 45000, 'testtest', 'testtest', 'testtest', 3),
-(5, 'testProducteur', 'testProducteur', 'testProducteur', 'testProducteur@testProducteur.com', '0631313131', 45000, 'testProducteur', 'testProducteur', 'testProducteur', 3);
+(1, 'Fouque', 'Patrice', '52 rue je sais pas', 'jesaispas@gmail.com', 631313131, 45000, 'Orléans', 'mdp', 'Patrice', 1),
+(2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', 632323232, 45000, 'Orléans', 'mdp', 'Robin', 2),
+(3, 'Benardeau', 'Quentin', '54 rue je sais pas', 'jesaispas@gmail.com', 634343434, 45000, 'Orléans', 'mdp', 'Quentin', 3),
+(4, 'testtest', 'testtest', 'testtest', 'testtest@testtest.testtest', 631313131, 45000, 'testtest', 'testtest', 'testtest', 3),
+(5, 'testProducteur', 'testProducteur', 'testProducteur', 'testProducteur@testProducteur.com', 631313131, 45000, 'testProducteur', 'testProducteur', 'testProducteur', 3);
 
 --
 -- Contraintes pour les tables exportées

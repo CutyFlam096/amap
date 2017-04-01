@@ -1,7 +1,7 @@
 <div class='container'>
-	<p>Creation d'un utilisateur utilisateur</p>
+	<p>Creation d'un utilisateur</p>
 	<div class='form-group'>
-		<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=voir'>
+		<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=ajouter'>
 				<label for='login_utilisateur'>Login</label>
 				<input name='login_utilisateur' id='login_utilisateur' type='text' class='form-control' placeholder="Le login et/ou le mail que vous avez rentré précédemment existe(nt) déjà" size='30' maxlength='45' onblur="checkLogin()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
 				
@@ -27,7 +27,7 @@
 				<input name='ville_utilisateur' id='ville_utilisateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkVille()">
 				
 				<label for='type_utilisateur'>Type d'utilisateur</label></br>
-				<select name='type_utilisateur'>
+				<select class='form-control' name='type_utilisateur'>
 				<?php
 					foreach ($types as $type)
 					{
