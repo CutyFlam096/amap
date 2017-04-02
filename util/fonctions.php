@@ -328,6 +328,7 @@ class AMAP
 	      //Nous allons passer par un panier temporaire
 	      $tmp=array();
 		  $tmp['idProduit'] = array();
+		  $tmp['imageProduit'] = array();
 	      $tmp['libelleProduit'] = array();
 		  $tmp['descriptionProduit'] = array();
 	      $tmp['qteProduit'] = array();
@@ -338,6 +339,7 @@ class AMAP
 	         if ($_SESSION['panier']['libelleProduit'][$i] !== $libelleProduit)
 	         {
 				array_push( $tmp['idProduit'],$_SESSION['panier']['idProduit'][$i]);
+				array_push( $tmp['imageProduit'],$_SESSION['panier']['imageProduit'][$i]);
 	            array_push( $tmp['libelleProduit'],$_SESSION['panier']['libelleProduit'][$i]);
 				array_push( $tmp['descriptionProduit'],$_SESSION['panier']['descriptionProduit'][$i]);
 	            array_push( $tmp['qteProduit'],$_SESSION['panier']['qteProduit'][$i]);
