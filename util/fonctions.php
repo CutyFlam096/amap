@@ -284,6 +284,7 @@ class AMAP
 	   {
 	      $_SESSION['panier']=array();
 	      $_SESSION['panier']['idProduit'] = array();
+		  $_SESSION['panier']['imageProduit'] = array();
 	      $_SESSION['panier']['libelleProduit'] = array();
 	      $_SESSION['panier']['descriptionProduit'] = array();
 	      $_SESSION['panier']['prixProduit'] = array();
@@ -292,7 +293,7 @@ class AMAP
 	   return true;
 	}
 
-	public function ajouterArticle($idProduit,$libelleProduit,$descriptionProduit,$qteProduit,$prixProduit)
+	public function ajouterArticle($idProduit,$imageProduit,$libelleProduit,$descriptionProduit,$qteProduit,$prixProduit)
 	{
 	   //Si le panier existe
 	   if (AMAP::creationPanier())
@@ -308,6 +309,7 @@ class AMAP
 	      {
 	         //Sinon on ajoute le produit
 			 array_push( $_SESSION['panier']['idProduit'],$idProduit);
+			 array_push( $_SESSION['panier']['imageProduit'],$imageProduit);
 			 array_push( $_SESSION['panier']['libelleProduit'],$libelleProduit);
 	         array_push( $_SESSION['panier']['descriptionProduit'],$descriptionProduit);
 	         array_push( $_SESSION['panier']['qteProduit'],$qteProduit);

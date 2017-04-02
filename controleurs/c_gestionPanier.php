@@ -17,12 +17,14 @@ elseif($_REQUEST['action'] == "viderPanier")
 else if($_REQUEST['action'] == "ajouter")
 {
 	/**
-	echo $_REQUEST['idProduit'];
-	echo $_POST['qte_produit'];
- 	echo $_REQUEST['libelleProduit'];
-	echo $_REQUEST['prixProduit'];
+	echo $_REQUEST['idProduit']."</br>";
+	echo $_POST['qte_produit']."</br>";
+ 	echo $_REQUEST['libelleProduit']."</br>";
+	echo $_REQUEST['prixProduit']."</br>";
+	echo $_REQUEST['imageProduit'];
 	**/
-	$pdo->ajouterArticle($_REQUEST['idProduit'],$_REQUEST['libelleProduit'],$_REQUEST['descriptionProduit'],$_POST['qte_produit'],$_REQUEST['prixProduit']);
+	
+	$pdo->ajouterArticle($_REQUEST['idProduit'],$_REQUEST['imageProduit'],$_REQUEST['libelleProduit'],$_REQUEST['descriptionProduit'],$_REQUEST['qte_produit'],$_REQUEST['prixProduit']);
 	include("vues/v_panier.php"); //retourne sur le panier
 }
 else if($_REQUEST['action'] == "modifier")

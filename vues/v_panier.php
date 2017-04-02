@@ -29,7 +29,7 @@
 					echo "<tr>";
 					
 					echo "<td>
-							<img class='imageproduit' src= 'img/produits/".mb_strtolower($_SESSION['panier']['libelleProduit'][$i]).".jpg' alt='' />
+							<img class='imageproduit' src= '".mb_strtolower($_SESSION['panier']['imageProduit'][$i])."' alt='' />
 						</td>";
 					
 					echo "<td>".$_SESSION['panier']['libelleProduit'][$i]."</ td>";
