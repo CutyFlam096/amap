@@ -50,7 +50,7 @@ if (isset($_SESSION['id']))//si co
 				//nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit);
 			}
 			
-			echo "livraison OK";
+			//echo "livraison OK";
 		}
 		else
 		{
