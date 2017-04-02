@@ -1,6 +1,7 @@
 ﻿<?php
 $action = $_REQUEST['action'];
 $categories = $pdo->get_categ();
+$produits = $produits = $pdo->get_produitProducteur($_SESSION['id']);
 
 switch($action)
 {

@@ -1,7 +1,3 @@
-<?php
-	$produits = $produits = $pdo->get_produitProducteur($_SESSION['id']);
-	//echo $_SESSION['id_Type_utilisateur'];
-?>
 	<div class="container">
 		<div class="row">
 			<form method='post' action='index.php?uc=ajout_produit&action=formAjouterArticle'>
