@@ -411,9 +411,17 @@ class AMAP
 
 	public function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 	{
-		$req = AMAP::$monPdo->prepare("INSERT INTO colis (montanttotal,id_livraison,quantite,id_produit) VALUES (:montant, :idLiv, :qte, :idProd)");
-
-		$req->execute(array(
+		$req = AMAP::$monPdo->prepare("SELECT * FROM produit WHERE id = :unId");
+		$req->execute(array('unId' => $idProduit));
+		$produit = $req->fetch();
+		
+		$nouvelleQuantite = $produit['quantite'] - $quantiteProd; //calcule la nouvelle quantite du produit
+		
+		$req1 = AMAP::$monPdo->prepare("UPDATE produit SET quantite = :qte WHERE id = :id");
+		$req1->execute(array('qte' => $nouvelleQuantite, 'id' => $idProduit));
+		
+		$req2 = AMAP::$monPdo->prepare("INSERT INTO colis (montanttotal,id_livraison,quantite,id_produit) VALUES (:montant, :idLiv, :qte, :idProd)");
+		$req2->execute(array(
 			'montant' => $montantTotal,
 			'idLiv' => $idLivraison,
 			'qte' => $quantiteProd,

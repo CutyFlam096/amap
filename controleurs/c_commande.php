@@ -40,12 +40,9 @@ if (isset($_SESSION['id']))//si connecté
 				
 				if ($testProduits == true)//si tous les produits OK
 				{
-					
 					$idLivraison = $pdo->nouvLivraison($_SESSION['id'], $date_livraison);//creer la nouvelle livraison et recupere son id
-					echo "Creation livraison OK </br>";
 					
-					$nbArticles = $pdo->compterArticles();
-					echo "Creation article OK </br>";
+					$nbArticles = $pdo->compterArticles();=
 					for ($i=0 ;$i < $nbArticles ; $i++)//pour chaque article du panier
 					{
 						$montantTotal = $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
