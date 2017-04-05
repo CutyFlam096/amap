@@ -1,8 +1,8 @@
 <?php
 $action = $_REQUEST['action'];
-if (isset($_SESSION['id']))//si co
+if (isset($_SESSION['id']))//si connecté
 {
-	if (count($_SESSION['panier']['libelleProduit']) <= 0)
+	if (count($_SESSION['panier']['libelleProduit']) == 0)
 	{
 		echo "panier vide";
 	}
@@ -12,7 +12,7 @@ if (isset($_SESSION['id']))//si co
 		{
 			case 'choisirDate' :
 			{
-				include_once('vues/v_calendrier.php');
+				include('vues/v_calendrier.php');
 				break;
 			}
 			case 'passerCommande' :
@@ -40,23 +40,26 @@ if (isset($_SESSION['id']))//si co
 				
 				if ($testProduits == true)//si tous les produits OK
 				{
-					$idLivraison = $pdo->nouvLivraison($_SESSION['id'], $date_livraison);//creer la nouvelle livraison et recupere son id
 					
-					echo $idLivraison;
+					$idLivraison = $pdo->nouvLivraison($_SESSION['id'], $date_livraison);//creer la nouvelle livraison et recupere son id
+					echo "Creation livraison OK </br>";
+					
 					$nbArticles = $pdo->compterArticles();
+					echo "Creation article OK </br>";
 					for ($i=0 ;$i < $nbArticles ; $i++)//pour chaque article du panier
 					{
 						$montantTotal = $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
 						$quantiteProd = $_SESSION['panier']['qteProduit'][$i];
 						$idProduit = $_SESSION['panier']['idProduit'][$i];
 						
-						//nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit);
+						$pdo->nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit);
 					}
+					
+					$pdo->supprimePanier();
 				}
 				else
 				{
-					echo "erreur de tes morts!";
-					//erreur qte produit
+					echo "erreur quantite produit!";
 					echo $testProduits;
 				}
 				

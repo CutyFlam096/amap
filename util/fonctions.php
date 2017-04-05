@@ -397,23 +397,21 @@ class AMAP
 	public function supprimePanier()
 	{unset($_SESSION['panier']);}
 
-	public function nouvLivraison($unIdUtil, $dateLiv)
+	public function nouvLivraison($unIdUtil, $d)
 	{
-		//convertir date en date bdd
+		//02/11/2017 -> 2017-11-02, convertir date fr en date bdd
+		list($jour, $mois, $annee) = explode('/', $d);
+		$uneDate = $annee."-".$mois."-".$jour;
 		
-		
-		$req = AMAP::$monPdo->prepare("INSERT INTO livraison (id_utilisateur, dateLivraison) VALUES (':unId', ':uneDate')");
-		$req->execute(array(
-			':unId' => "6",
-			':uneDate' => "2017-02-06"));
+		$req = AMAP::$monPdo->prepare("INSERT INTO livraison (id_utilisateur, dateLivraison) VALUES (".$unIdUtil.", '".$uneDate."')");
+		$req->execute();
 		
 		return AMAP::$monPdo -> lastInsertId();
 	}
 
 	public function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 	{
-		/**
-		$req = AMAP::$monPdo->prepare("INSERT INTO colis ('montanttotal','id_livraison','quantite','id_produit') VALUES (:montant, :idLiv, :qte, :idProd)");
+		$req = AMAP::$monPdo->prepare("INSERT INTO colis (montanttotal,id_livraison,quantite,id_produit) VALUES (:montant, :idLiv, :qte, :idProd)");
 
 		$req->execute(array(
 			'montant' => $montantTotal,
@@ -422,7 +420,6 @@ class AMAP
 			'idProd' => $idProduit
 			)
 		);
-		**/
 
 		return true;
 	}
