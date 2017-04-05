@@ -36,7 +36,7 @@ switch($uc)
 		{include("controleurs/c_deconnection.php");break;}
 	case 'infoCompte' :
 		{include("controleurs/c_infosCompte.php");break;}
-	case 'passerCommande' :
+	case 'commande' :
 		{include("controleurs/c_commande.php");break;}
 	case 'ajout_produit' :
 		{include("controleurs/c_gestionProduits.php");break;}

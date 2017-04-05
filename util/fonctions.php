@@ -100,14 +100,10 @@ class AMAP
 		$req = AMAP::$monPdo->prepare($req);
 		$req -> execute();
 		$produit = $req->fetch();
-		if ($qte > $produit['quantite'])
-		{
-			return false;
-		}
+		if ($qte >= $produit['quantite'])
+		{return false;}
 		else
-		{
-			return true;
-		}
+		{return true;}
 
 	}
 
@@ -399,19 +395,19 @@ class AMAP
 	}
 
 	public function supprimePanier()
-	{
-	   unset($_SESSION['panier']);
-	}
+	{unset($_SESSION['panier']);}
 
-	public function nouvLivraison($unIdUtil)
+	public function nouvLivraison($unIdUtil, $dateLiv)
 	{
-		/**
-		$req = AMAP::$monPdo->exec("INSERT INTO livraison ('id_utilisateur') VALUES (".$unIdUtil.")");
-
-		var_dump($req);
-		var_dump($bdd->lastInsertId());
-		return $bdd->lastInsertId();
-		**/
+		//convertir date en date bdd
+		
+		
+		$req = AMAP::$monPdo->prepare("INSERT INTO livraison (id_utilisateur, dateLivraison) VALUES (':unId', ':uneDate')");
+		$req->execute(array(
+			':unId' => "6",
+			':uneDate' => "2017-02-06"));
+		
+		return AMAP::$monPdo -> lastInsertId();
 	}
 
 	public function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
