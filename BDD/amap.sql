@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 --
 
 INSERT INTO `categorie` (`id`, `libelle`) VALUES
-(1, 'feculent'),
-(2, 'fruit');
+(1, 'Féculent'),
+(2, 'Fruit');
 
 -- --------------------------------------------------------
 
@@ -114,16 +114,16 @@ CREATE TABLE IF NOT EXISTS `produit` (
 --
 
 INSERT INTO `produit` (`id`, `libelle`, `description`, `prixunitaire`, `quantite`, `id_utilisateur`, `id_categorie`, `image`) VALUES
-(1, 'Patate', 'des patates', 0.5, 850, 2, 1, 'img/produits/patate.jpg'),
-(2, 'Pomme', 'des pommes', 0.7, 620, 2, 2, 'img/produits/pomme.jpg'),
-(4, 'cerise', 'Des cerises.', 0.4, 741, 2, 2, 'img/produits/cerise.jpg'),
-(5, 'asperge', 'Des asperges.', 0.8, 456, 2, 1, 'img/produits/asperge.jpg'),
-(6, 'betterave', 'Des betteraves.', 0.9, 963, 2, 1, 'img/produits/betterave.jpg'),
-(7, 'carotte', 'Des carottes.', 1, 123, 2, 1, 'img/produits/carotte.jpg'),
-(8, 'figue', 'Des figues', 1, 12, 2, 2, 'img/produits/figue.jpg'),
-(9, 'kiwi', 'Des kiwis.', 1, 282, 2, 2, 'img/produits/kiwi.jpg'),
-(10, 'laitue', 'Des laitues.', 1, 321, 2, 1, 'img/produits/laitue.jpg'),
-(11, 'pruneau', 'Des pruneaux', 1, 32, 2, 2, 'img/produits/pruneau.jpg');
+(1, 'Patate', 'Des patates', 0.5, 850, 2, 1, 'img/produits/patate.jpg'),
+(2, 'Pomme', 'Des pommes', 0.7, 620, 2, 2, 'img/produits/pomme.jpg'),
+(4, 'Cerise', 'Des cerises.', 0.4, 741, 2, 2, 'img/produits/cerise.jpg'),
+(5, 'Asperge', 'Des asperges.', 0.8, 456, 2, 1, 'img/produits/asperge.jpg'),
+(6, 'Betterave', 'Des betteraves.', 0.9, 963, 2, 1, 'img/produits/betterave.jpg'),
+(7, 'Carotte', 'Des carottes.', 1, 123, 2, 1, 'img/produits/carotte.jpg'),
+(8, 'Figue', 'Des figues', 1, 12, 2, 2, 'img/produits/figue.jpg'),
+(9, 'Kiwi', 'Des kiwis.', 1, 282, 2, 2, 'img/produits/kiwi.jpg'),
+(10, 'Laitue', 'Des laitues.', 1, 321, 2, 1, 'img/produits/laitue.jpg'),
+(11, 'Pruneau', 'Des pruneaux', 1, 32, 2, 2, 'img/produits/pruneau.jpg');
 
 -- --------------------------------------------------------
 
