@@ -21,19 +21,12 @@ if (isset($_SESSION['id']))//si connecté
 				$client = $_SESSION['nom']." ".$_SESSION['prenom'];
 				$adresse = $_SESSION['adresse'].", ".$_SESSION['codepostal']." ".$_SESSION['ville'];
 				
-				echo $date_livraison."</br>";
-				echo $client."</br>";
-				echo $adresse."</br>";
-				
 				$testProduits = true;
 				//pour chaque produit, verifier si sa qte est <= a celle en bdd
 				for ($i=0 ;$i < count($_SESSION['panier']['libelleProduit']) && $testProduits==true; $i++)
 				{
 					$libelle = $_SESSION['panier']['libelleProduit'][$i];
 					$qte = $_SESSION['panier']['qteProduit'][$i];
-					
-					echo $libelle." ";
-					echo $qte."</br>";
 					
 					$testProduits = $pdo->verifQteProduit($libelle, $qte);
 				}
@@ -51,8 +44,8 @@ if (isset($_SESSION['id']))//si connecté
 						
 						$pdo->nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit);
 					}
-					
-					$pdo->supprimePanier();
+					include('vues/v_resumeCommande.php');
+					$pdo->supprimePanier();//vide le panier
 				}
 				else
 				{
@@ -67,5 +60,5 @@ if (isset($_SESSION['id']))//si connecté
 }
 else
 {
-	//echo "pas co :(";
+	include('vues/v_erreurConnexionCommande.php');
 }
