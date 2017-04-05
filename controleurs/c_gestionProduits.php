@@ -30,11 +30,6 @@ switch($action)
 		header("location: index.php?uc=voirProduitsProducteur");;
 		break;
 	}
-	case 'formulaireAjout' :
-	{
-		include("vues/v_ajout.php");
-		break;
-	}
 	case 'ajouterArticle' :
 	{
 		$type_autorise = array('JPG','jpg','jpeg','jpe','png');
