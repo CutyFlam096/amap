@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 31 Mars 2017 à 15:27
+-- Généré le :  Mer 05 Avril 2017 à 13:58
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `libelle` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `categorie`
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   `dateLivraison` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_livraison_id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `livraison`
@@ -96,17 +96,17 @@ INSERT INTO `livraison` (`id`, `id_utilisateur`, `dateLivraison`) VALUES
 
 CREATE TABLE IF NOT EXISTS `produit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
+  `libelle` varchar(25) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
   `prixunitaire` float DEFAULT NULL,
   `quantite` int(11) NOT NULL,
   `id_utilisateur` int(11) DEFAULT NULL,
   `id_categorie` int(11) DEFAULT NULL,
-  `image` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `image` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Produit_id_utilisateur` (`id_utilisateur`),
   KEY `FK_Produit_id_categorie` (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `produit`
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `ravitailler` (
 
 CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
+  `libelle` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -167,15 +167,15 @@ INSERT INTO `type_utilisateur` (`id`, `libelle`) VALUES
 
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` char(25) CHARACTER SET latin1 DEFAULT NULL,
-  `prenom` char(25) CHARACTER SET latin1 DEFAULT NULL,
-  `adresse` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `mail` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `nom` char(25) DEFAULT NULL,
+  `prenom` char(25) DEFAULT NULL,
+  `adresse` varchar(100) DEFAULT NULL,
+  `mail` varchar(50) DEFAULT NULL,
   `tel` varchar(10) NOT NULL,
   `codepostal` int(11) NOT NULL,
-  `ville` char(100) CHARACTER SET latin1 NOT NULL,
-  `mdp` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `login` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
+  `ville` char(100) NOT NULL,
+  `mdp` varchar(50) NOT NULL,
+  `login` varchar(25) DEFAULT NULL,
   `id_Type_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_utilisateur_id_Type_utilisateur` (`id_Type_utilisateur`)
