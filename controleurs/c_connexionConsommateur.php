@@ -26,12 +26,6 @@ switch($action)
 		{
 			$_SESSION['alreadyExists'] = true;
 
-			$_SESSION['nom']=$nom;
-			$_SESSION['prenom']=$prenom;
-			$_SESSION['adresse']=$adresse;
-			$_SESSION['ville']=$ville;
-			$_SESSION['codePostal']=$codePostal;
-			$_SESSION['tel']=$tel;
 			header('Location: index.php?uc=connexionConsommateur&action=formInscription');
 		}
 		else
@@ -50,7 +44,7 @@ switch($action)
 	{
 		if (isset($_POST['login_consommateur'])) 
 		{
-		  $test_compte = $pdo->set_connexion($_POST['login_consommateur'], $_POST['mdp_consommateur']);
+		  $test_compte = $pdo->set_connexion($_POST['login_consommateur'],  $_POST['mdp_consommateur']);
 			/*
 			echo $_SESSION['nom']."</br>"; 
 			echo $_SESSION['prenom']."</br>"; 

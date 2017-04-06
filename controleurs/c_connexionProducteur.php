@@ -26,12 +26,6 @@ switch($action)
 		{
 			$_SESSION['alreadyExists'] = true;
 
-			$_SESSION['nom']=$nom;
-			$_SESSION['prenom']=$prenom;
-			$_SESSION['adresse']=$adresse;
-			$_SESSION['ville']=$ville;
-			$_SESSION['codePostal']=$codePostal;
-			$_SESSION['tel']=$tel;
 			header('Location: index.php?uc=connexionProducteur&action=formInscription');
 		}
 		else

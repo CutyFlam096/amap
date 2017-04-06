@@ -7,7 +7,7 @@
 				
 				<label for='mdp_consommateur'>Mot de passe</label>
 				<input name='mdp_consommateur' id='mdp_consommateur' class='form-control' type='password' value='' size='30' maxlength='45' />
-				
+				</br>
 				<input type='submit' value='Valider' class='btn btn-primary'>
 				<input type='reset' value='Annuler' class='btn btn-primary'>
 			</form>

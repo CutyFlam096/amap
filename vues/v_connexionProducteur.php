@@ -7,7 +7,7 @@
 				
 				<label for='mdp_producteur'>Mot de passe</label>
 				<input name='mdp_producteur' id='mdp_producteur' class='form-control' type='password' value='' size='30' maxlength='45' />
-				
+				</br>
 				<input type='submit' value='Valider' class='btn btn-primary'>
 				<input type='reset' value='Annuler' class='btn btn-primary'>
 			</form>
