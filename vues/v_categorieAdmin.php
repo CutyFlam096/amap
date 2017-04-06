@@ -31,7 +31,7 @@
 					<div class='modal-body'>
 						<p>
 							Êtes-vous sûr de vouloir supprimer définitivement cette catégorie?</br>
-							Cela va egalement supprimer tous les produits de cette catégorie et les colis qui contiennent ces produits.
+							Cela va également supprimer tous les produits de cette catégorie ainsi que les colis contenant ces produits.
 						</p>
 						<form method='POST' action='index.php?uc=gererCategorie&action=supprimer'>
 							<input type='hidden' name='idProduit' class='id_produit_del'/>

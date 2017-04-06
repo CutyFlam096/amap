@@ -66,7 +66,7 @@
 				<div class='modal-content'>
 					<div class='modal-body'>
 						<p>
-							Êtes-vous sûr de vouloir supprimer définitivement cet utilisateur?
+							Êtes-vous sûr de vouloir supprimer définitivement cet utilisateur ?
 						</p>
 						<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=supprimer'>
 							<input type='hidden' name='idUtil' class='id_produit_del'/>
