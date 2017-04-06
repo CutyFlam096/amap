@@ -8,7 +8,7 @@
 				<?php
 					if(isset($_SESSION['nom']) and !isset($_SESSION['alreadyExists']) )
 					{
-						echo "<p>Vous ètes connecté en tant que ".$_SESSION['prenom']." ".$_SESSION['nom']."</p>";
+						echo "<p>Vous ètes connecté(e) en tant que ".$_SESSION['prenom']." ".$_SESSION['nom']."</p>";
 					}
 				?>
 				</div>
@@ -46,7 +46,7 @@
 						  <li><a href='index.php?uc=gererCategorie&action=voir'>Gestion catégories</a></li>
 						  <li><a href='index.php?uc=gererProduit&action=voir'>Gestion produit</a></li>
 						  <li><a href='index.php?uc=gererCompteUtilisateur&action=voir'>Comptes utilisateur</a></li>
-						  <li><a href='index.php?uc=infoCompte&action=voir'>informations compte</a></li>
+						  <li><a href='index.php?uc=infoCompte&action=voir'>Informations compte</a></li>
 						  <li><a href='index.php?uc=deco'>Déconnectez-vous</a></li>
 						</ul>
 					  </div>
@@ -64,7 +64,7 @@
 						<ul class='nav navbar-nav'>
 						  <li><a href='index.php?uc=voirProduits'>Produits</a></li>
 						  <li><a href='index.php?uc=voirProduitsProducteur'>Mes produits</a></li>
-						  <li><a href='index.php?uc=infoCompte&action=voir'>informations compte</a></li>
+						  <li><a href='index.php?uc=infoCompte&action=voir'>Informations compte</a></li>
 						  <li><a href='index.php?uc=deco'>Déconnectez-vous</a></li>
 						</ul>
 					  </div>
@@ -81,7 +81,7 @@
 						</div>
 						<ul class='nav navbar-nav'>
 						  <li><a href='index.php?uc=voirProduits'>Produits</a></li>
-						  <li><a href='index.php?uc=infoCompte&action=voir'>informations compte</a></li>
+						  <li><a href='index.php?uc=infoCompte&action=voir'>Informations compte</a></li>
 						  <li><a href='index.php?uc=gestionPanier&action=voir'>Panier</a></li>
 						  <li><a href='index.php?uc=deco'>Déconnectez-vous</a></li>
 						</ul>
