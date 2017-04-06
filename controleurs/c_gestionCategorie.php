@@ -7,8 +7,14 @@ switch($action)
 	case 'ajout' :
 	{
 		$nomCateg=$_REQUEST['nomCateg'];
-		$pdo->ajouterCategorieBD($nomCateg);
-		header("location: index.php?uc=gererCategorie&action=voir"); //permet de rafraichir la liste des produit après supression
+		if($nomCateg != "")
+		{
+			$pdo->ajouterCategorieBD($nomCateg);
+			header("location: index.php?uc=gererCategorie&action=voir"); //permet de rafraichir la liste des produit après supression
+		}
+		else{
+			include_once('vues/v_erreur_nom_categorie.php');
+		}
 		break;
 	}
 	case 'voir' :
