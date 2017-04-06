@@ -1,12 +1,19 @@
 <div class="container">
-	<div class="row">				
+	<div class="row">	
+		<div class='col-xs-12 well'>
+			<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=formAjout'>
+				<button type='submit' class='btn btn-default btn-sm '>
+					<span class='glyphicon glyphicon-remove-circle'></span>Ajouter un utilisateur
+				</button>
+			</form>
+		</div>
 		<?php
 		foreach($utilisateurs as $util)
 		{
 			echo "<div class='col-xs-12 well'>
 					<form>
-						<button id='".$util['id']."' type='button' data-toggle='modal' data-target='#myModal' class='btn btn-modal btn-default btn-sm'>
-							<span class='glyphicon glyphicon-remove-circle'></span>
+						<button id='".$util['id']."' type='button' data-toggle='modal' data-target='#myModal' class='alert alert-danger btn btn-modal btn-default btn-sm'>
+							<span class='glyphicon glyphicon-remove-circle'></span>Supprimer cet utilisateur?
 						</button>
 					</form>
 					<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=modifier' class='form-group'>
@@ -48,18 +55,12 @@
 							}
 						
 					echo "</select>
-					
-						<input name='valider' id='valider' value='Valider' type='submit' class='btn btn-primary' value='".$util['prenom']."'>
+						</br>
+						<input name='valider' id='valider' value='Valider les modifications' type='submit' class='btn btn-primary' value='".$util['prenom']."'>
 					</form>
 				 </div>";
 		}
 		?>
-		
-		<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=formAjout'>
-			<button type='submit' class='btn btn-default btn-sm'>
-				<span class='glyphicon glyphicon-remove-circle'></span>Ajouter un utilisateur
-			</button>
-		</form>
 		
 		<div class='modal fade' id='myModal' role='dialog'>
 			<div class='modal-dialog'>

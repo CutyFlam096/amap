@@ -33,8 +33,8 @@
 				Nouveau MDP<input name='nouv_mdp'  id='nouv_mdp' type='password' class='form-control' size='30' maxlength='45' />
 				Confirmer Nouveau MDP<input name='nouv_mdp2' id='nouv_mdp2' type='password' class='form-control' size='30' maxlength='45' />
 				</br>
-				<input type='submit' value='Valider' class='btn btn-primary'>
-				<input type='reset' value='Annuler' class='btn btn-primary'>
+				<input type='submit' value='Valider les modifications' class='btn btn-primary'>
+				<input type='reset' value='Annuler les modifications' class='btn btn-primary'>
 			</form>
 		</div>
 	</div>";
