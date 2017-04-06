@@ -20,14 +20,13 @@ if ($_REQUEST['action'] == "modif")
 		$change_param = $pdo->set_param_compte_no_mdp($id, $nom_util, $prenom_util, $adresse_util, $mail_util, $tel_util, $cp_util, $ville_util, $login_util);
 		if ( $change_param )
 		{
-			echo "changement parametre comtpe ok";
+			echo "changement parametre compte ok";
 		}
 		header('Location: index.php?uc=infoCompte&action=voir');
 	}
 	
-	else if ($ancien_mdputil == $_SESSION['mdp'] && $nouvmdp_util == $nouvmdp2_util)
+	else if (password_verify($ancien_mdputil, $_SESSION['mdp']) && $nouvmdp_util == $nouvmdp2_util)
 	{
-		echo "MDP ok";
 		$change_param = $pdo->set_param_compte($id, $nom_util, $prenom_util, $adresse_util, $mail_util, $tel_util, $cp_util, $ville_util, $login_util, $nouvmdp_util);
 		if ( $change_param )
 		{

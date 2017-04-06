@@ -2,9 +2,8 @@
 -- version 4.1.14
 -- http://www.phpmyadmin.net
 --
---
 -- Client :  127.0.0.1
--- Généré le :  Mer 05 Avril 2017 à 13:58
+-- Généré le :  Jeu 06 Avril 2017 à 16:32
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -56,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `colis` (
   PRIMARY KEY (`ref`),
   KEY `FK_colis_id` (`id_livraison`),
   KEY `FK_colis_id_Produit` (`id_Produit`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `colis`
@@ -65,7 +64,9 @@ CREATE TABLE IF NOT EXISTS `colis` (
 INSERT INTO `colis` (`ref`, `montanttotal`, `id_livraison`, `quantite`, `id_Produit`) VALUES
 (1, 50, 1, 100, 1),
 (2, 100, 1, 200, 1),
-(3, 50, 2, 100, 1);
+(3, 50, 2, 100, 1),
+(4, 0.8, 5, 1, 5),
+(5, 2.7, 5, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   `dateLivraison` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_livraison_id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `livraison`
@@ -87,7 +88,8 @@ CREATE TABLE IF NOT EXISTS `livraison` (
 
 INSERT INTO `livraison` (`id`, `id_utilisateur`, `dateLivraison`) VALUES
 (1, 3, '2017-02-06'),
-(2, 3, '2017-02-06');
+(2, 3, '2017-02-06'),
+(5, 3, '2017-04-05');
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   PRIMARY KEY (`id`),
   KEY `FK_Produit_id_utilisateur` (`id_utilisateur`),
   KEY `FK_Produit_id_categorie` (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `produit`
@@ -117,8 +119,8 @@ INSERT INTO `produit` (`id`, `libelle`, `description`, `prixunitaire`, `quantite
 (1, 'Patate', 'Des patates', 0.5, 850, 2, 1, 'img/produits/patate.jpg'),
 (2, 'Pomme', 'Des pommes', 0.7, 620, 2, 2, 'img/produits/pomme.jpg'),
 (4, 'Cerise', 'Des cerises.', 0.4, 741, 2, 2, 'img/produits/cerise.jpg'),
-(5, 'Asperge', 'Des asperges.', 0.8, 456, 2, 1, 'img/produits/asperge.jpg'),
-(6, 'Betterave', 'Des betteraves.', 0.9, 963, 2, 1, 'img/produits/betterave.jpg'),
+(5, 'Asperge', 'Des asperges.', 0.8, 455, 2, 1, 'img/produits/asperge.jpg'),
+(6, 'Betterave', 'Des betteraves.', 0.9, 960, 2, 1, 'img/produits/betterave.jpg'),
 (7, 'Carotte', 'Des carottes.', 1, 123, 2, 1, 'img/produits/carotte.jpg'),
 (8, 'Figue', 'Des figues', 1, 12, 2, 2, 'img/produits/figue.jpg'),
 (9, 'Kiwi', 'Des kiwis.', 1, 282, 2, 2, 'img/produits/kiwi.jpg'),
@@ -175,23 +177,22 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `tel` varchar(10) NOT NULL,
   `codepostal` int(11) NOT NULL,
   `ville` char(100) NOT NULL,
-  `mdp` varchar(50) NOT NULL,
+  `mdp` varchar(255) NOT NULL,
   `login` varchar(25) DEFAULT NULL,
   `id_Type_utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_utilisateur_id_Type_utilisateur` (`id_Type_utilisateur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `adresse`, `mail`, `tel`, `codepostal`, `ville`, `mdp`, `login`, `id_Type_utilisateur`) VALUES
-(1, 'Fouque', 'Patrice', '52 rue je sais pas ou', 'jesaispas@gmail.com', '0631313131', 45000, 'Orléans', 'mdp', 'Patrice', 1),
-(2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', '0632323232', 45000, 'Orléans', 'mdp', 'Robin', 2),
-(3, 'Benardeau', 'Quentin', '54 rue je sais pas ou', 'jesaispas@gmail.com', '0634343434', 45000, 'Orléans', 'mdp', 'Quentin', 3),
-(4, 'testtest', 'testtest', 'testtest', 'testtest@testtest.testtest', '0631313131', 45000, 'testtest', 'testtest', 'testtest', 3),
-(5, 'testProducteur', 'testProducteur', 'testProducteur', 'testProducteur@testProducteur.com', '0631313131', 45000, 'testProducteur', 'testProducteur', 'testProducteur', 3);
+(1, 'Fouque', 'Patrice', '52 rue je sais pas ou', 'jesaispas@gmail.com', '0631313131', 45000, 'Orléans', '$2y$10$NVKN05fVdejwfrcFUXv6jOqQgezQhvdTUVUSSSrdwwyygFANhkB4G', 'Patrice', 1),
+(2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', '0632323232', 45000, 'Orléans', '$2y$10$NVKN05fVdejwfrcFUXv6jOqQgezQhvdTUVUSSSrdwwyygFANhkB4G', 'Robin', 2),
+(3, 'Benardeau', 'Quentin', '54 rue je sais pas ou', 'jesaispas@gmail.com', '0634343434', 45000, 'Orléans', '$2y$10$U1v6ZyL6eHsW9bNcTK3ReOeJtr4lI6qun.JcmJKZ1T6ZVkXeaG0w6', 'Quentin', 3),
+(7, 'testmdp', 'testmdp', 'testmdp', 'testmdp@testmdp.fr', '0631561213', 45000, 'testmdp', '$2y$10$jSel/6LKmVhhe.08KiOMbulz.WjgiLzRh6YdEpwNnvWGGCHe2uTI6', 'testmdp', 1);
 
 --
 -- Contraintes pour les tables exportées

@@ -121,6 +121,8 @@ class AMAP
 
 	public function set_param_compte($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login, $newMdp)
 	{
+		$newMdp = password_hash($newMdp, PASSWORD_DEFAULT);
+		
 		$req = AMAP::$monPdo->prepare('UPDATE utilisateur
 							SET nom= :nom,
 							prenom= :prenom,
@@ -200,12 +202,11 @@ class AMAP
 
 	public function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, producteur ou admib
 	{
-	    $req = AMAP::$monPdo->prepare('SELECT * FROM utilisateur WHERE login= :login AND mdp = :mdp');
+		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur WHERE login=:login");
 
 		$req->execute(array(
-		'login' => $unLogin,
-		'mdp' => $unMdp
-		));
+			'login' => $unLogin,
+			));
 
 	    $utilisateur = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -218,19 +219,26 @@ class AMAP
 		}
 	    else
 		{
-			//si ok
-			$_SESSION['id'] = $utilisateur['id'];
-			$_SESSION['nom'] = $utilisateur['nom'];
-			$_SESSION['prenom'] = $utilisateur['prenom'];
-			$_SESSION['adresse'] = $utilisateur['adresse'];
-			$_SESSION['mail'] = $utilisateur['mail'];
-			$_SESSION['tel'] = $utilisateur['tel'];
-			$_SESSION['codepostal'] = $utilisateur['codepostal'];
-			$_SESSION['ville'] = $utilisateur['ville'];
-			$_SESSION['mdp'] = $utilisateur['mdp'];
-			$_SESSION['login'] = $utilisateur['login'];
-			$_SESSION['id_Type_utilisateur'] = $utilisateur['id_Type_utilisateur'];
-			return true;
+			$mdpBDD = $utilisateur['mdp'];
+			
+			if (password_verify($unMdp, $mdpBDD))
+			{
+				//si ok
+				$_SESSION['id'] = $utilisateur['id'];
+				$_SESSION['nom'] = $utilisateur['nom'];
+				$_SESSION['prenom'] = $utilisateur['prenom'];
+				$_SESSION['adresse'] = $utilisateur['adresse'];
+				$_SESSION['mail'] = $utilisateur['mail'];
+				$_SESSION['tel'] = $utilisateur['tel'];
+				$_SESSION['codepostal'] = $utilisateur['codepostal'];
+				$_SESSION['ville'] = $utilisateur['ville'];
+				$_SESSION['mdp'] = $utilisateur['mdp'];
+				$_SESSION['login'] = $utilisateur['login'];
+				$_SESSION['id_Type_utilisateur'] = $utilisateur['id_Type_utilisateur'];
+				return true;
+			}
+			else
+			{return false;}
 		}
 	}
 
@@ -256,6 +264,8 @@ class AMAP
 
 	public function set_compte($login, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $mdp, $type)//creer un compte
 	{
+		$hashMdp=password_hash($mdp, PASSWORD_DEFAULT);
+		
 	    $req = AMAP::$monPdo->prepare("INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 								  Value(:nom, :prenom, :adresse, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
 			
@@ -267,7 +277,7 @@ class AMAP
 			'tel' => $tel,
 			'codePostal' => $cp,
 			'ville' => $ville,
-			'mdp' => $mdp,
+			'mdp' => $hashMdp,
 			'login' => $login,
 			'type' => $type));
 			
@@ -567,8 +577,9 @@ class AMAP
 	
 	public function ajouterUtilBD($login, $nom, $prenom, $addr, $mail, $tel, $cp, $ville, $type, $mdp)
 	{
-		 $req = AMAP::$monPdo->prepare(
-		 "INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
+		$mdp = password_hash($mdp, PASSWORD_DEFAULT);
+		$req = AMAP::$monPdo->prepare(
+		"INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 		Value(:nom, :prenom, :addr, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
 			
 			$req->execute(array(
