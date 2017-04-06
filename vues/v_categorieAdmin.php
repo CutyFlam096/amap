@@ -1,6 +1,13 @@
 <div class="container">
 	<div class="row">
-					
+		<div class='col-xs-12 well'>
+			<p>Ajouter une nouvelle categorie</p>
+			<form method='POST' action='index.php?uc=gererCategorie&action=ajout'>
+				<input type='text' name="nomCateg" class='form-control'>
+				<input type='submit' class='btn btn-primary'>
+			</form>
+		</div>
+			
 		<?php
 		$cpt = 1;
 		foreach($categories as $categorie)
@@ -16,14 +23,6 @@
 			$cpt = $cpt + 1;
 		}
 		?>
-		
-		<div class='col-xs-12'>
-			<p>Ajouter une nouvelle categorie</p>
-			<form method='POST' action='index.php?uc=gererCategorie&action=ajout'>
-				<input type='text' name="nomCateg" class='form-control'>
-				<input type='submit' class='btn btn-primary'>
-			</form>
-		</div>
 		
 		<div class='modal fade' id='myModal' role='dialog'>
 			<div class='modal-dialog'>
