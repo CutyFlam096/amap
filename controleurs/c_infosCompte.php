@@ -36,10 +36,8 @@ if ($_REQUEST['action'] == "modif")
 	}
 	else
 	{
-		echo "MDP NO OK!!!";
+		include("vues/v_erreurMDP.php");
 	}
-
-
 }
 
 elseif ($_REQUEST['action'] == "voir")

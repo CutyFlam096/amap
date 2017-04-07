@@ -39,10 +39,12 @@
 							
 									<div class='row'>
 										<div class='col-12 well well-sm'>
-											
+											Quantité:
 											<input type='number' onblur='puProduitModif()' value=".$produit['quantite']." id='quantite_produit_modif' class='form-control input-sm' name='quantite_produit_modif' min='1'>
+											Prix:
 											<input type='number' onblur='qteProduitModif()' step='0.1' value=".$produit['prixunitaire']." id='pu_produit_modif' class='form-control input-sm' name='pu_produit_modif' min='0.1'>
 											<input type='hidden' name='id_produit' value='".$produit['id']."'/>
+											</br>
 											<input type='submit' onclick='return checkSubmitProduitModif()' class='form-control input-sm' value='Appliquer les modifications'></input>
 											
 										</div>
