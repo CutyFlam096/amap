@@ -120,7 +120,8 @@ function checkSubmitProduit()
 	}
 	
 	var description_produit = document.querySelector('[id="description_produit"]');
-	if ( libelle_produit.value.length < 10)
+	
+	if (description_produit.value.length < 10)
 	{
 		document.querySelector('[id="description_produit"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id="description_produit"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
