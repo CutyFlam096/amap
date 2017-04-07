@@ -3,19 +3,19 @@
 
 <div class='form-group'>
 		<form method='POST' action='index.php?uc=gererProduit&action=ajouterArticle' enctype="multipart/form-data">
-				<label for='libelle_produit'>libelle</label>
+				<label for='libelle_produit'>Libellé</label>
 				<input name='libelle_produit' id='libelle_produit' type='text' class='form-control'/>
 				
-				<label for='description_produit'>description</label>
+				<label for='description_produit'>Description</label>
 				<textarea name='description_produit' id='description_produit' class='form-control'></textarea>
 				
 				<label for='pu_produit'>Prix unitaire</label>
 				<input name='pu_produit' id='pu_produit' type='number'  step="0.01" class='form-control'/>
 				
-				<label for='quantite_produit'>Quantite</label>
+				<label for='quantite_produit'>Quantité</label>
 				<input name='quantite_produit' id='quantite_produit' type='number' class='form-control'/>
 				
-				<label for='categorie_produit'>Categorie</label>
+				<label for='categorie_produit'>Catégorie</label>
 				<select name='categorie_produit' class="form-control" >
 				<?php
 					foreach($categories as $categorie)
@@ -25,7 +25,7 @@
 				?>
 				</select>
 				
-				<label for='image_produit'>image</label></br>
+				<label for='image_produit'>Image</label></br>
 				<span class="btn btn-default btn-file">
 					<input type="file" name='image_produit' id='image_produit'/>
 				</span></br></br>

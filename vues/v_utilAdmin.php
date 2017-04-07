@@ -19,22 +19,22 @@
 					<form method='POST' action='index.php?uc=gererCompteUtilisateur&action=modifier' class='form-group'>
 						<input name='id_util' id='id_util' type='hidden' class='form-control' value='".$util['id']."'>
 						
-						<label for='nom_util'>Nom:</label>
+						<label for='nom_util'>Nom : </label>
 						<input name='nom_util' id='nom_util' type='text' class='form-control' value='".$util['nom']."'>
 						
-						<label for='prenom_util'>Prenom:</label>
+						<label for='prenom_util'>Prénom : </label>
 						<input name='prenom_util' id='prenom_util' type='text' class='form-control' value='".$util['prenom']."'>
 						
-						<label for='adresse_util'>Adresse:</label>
+						<label for='adresse_util'>Adresse : </label>
 						<input name='adresse_util' id='adresse_util' type='text' class='form-control' value='".$util['adresse']."'>
 						
-						<label for='mail_util'>Mail:</label>
+						<label for='mail_util'>Mail : </label>
 						<input name='mail_util' id='mail_util' type='text' class='form-control' value='".$util['mail']."'>
 						
-						<label for='tel_util'>Tel:</label>
+						<label for='tel_util'>Téléphone : </label>
 						<input name='tel_util' id='tel_util' type='text' class='form-control' value='".$util['tel']."'>
 						
-						<label for='cp_util'>CP:</label>
+						<label for='cp_util'>Code postal:</label>
 						<input name='cp_util' id='cp_util' type='text' class='form-control' value='".$util['codepostal']."'>
 						
 						<label for='ville_util'>Ville:</label>

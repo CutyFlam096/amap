@@ -12,7 +12,7 @@
 				<label for='nom_consommateur'>Nom</label>
 				<input name='nom_consommateur' id='nom_consommateur' type='text' class='form-control' value='<?php echo $_SESSION['nom']; ?>' size='30' maxlength='45' onblur="checkLastName()">
 				
-				<label for='prenom_consommateur'>Prenom</label>
+				<label for='prenom_consommateur'>Prénom</label>
 				<input name='prenom_consommateur' id='prenom_consommateur' type='text' class='form-control' value='<?php echo $_SESSION['prenom']; ?>' size='30' maxlength='45' onblur="checkFirstName()">
 				
 				<label for='adresse_consommateur'>Adresse</label>
@@ -21,7 +21,7 @@
 				<label for='mail_consommateur'>Mail</label>
 				<input name='mail_consommateur' id='mail_consommateur' type='text' class='form-control' value='' placeholder="Le login et/ou le mail que vous avez rentré précédemment existe(nt) déjà" size='30' maxlength='45' onblur="checkMail()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
 				
-				<label for='tel_consommateur'>Tel</label>
+				<label for='tel_consommateur'>Téléphone</label>
 				<input name='tel_consommateur' id='tel_consommateur' type='text' class='form-control' value='<?php echo $_SESSION['tel']; ?>' size='30' maxlength='45' onblur="checkTel()">
 				
 				<label for='code_postal_consommateur'>Code postal</label>
@@ -30,9 +30,9 @@
 				<label for='ville_consommateur'>Ville</label>
 				<input name='ville_consommateur' id='ville_consommateur' type='text' class='form-control' value='<?php echo $_SESSION['ville']; ?>' size='30' maxlength='45' onblur="checkVille()">
 				
-				<label for='mdp_consommateur'>MDP</label>
+				<label for='mdp_consommateur'>Mot de passe</label>
 				<input name='mdp_consommateur' id='mdp_consommateur' class='form-control' type='password' value='' size='30' maxlength='45' onblur="checkPswd()">
-				confirmer MDP
+				Confirmer mot de passe
 				<input name='mdp_consommateur2' id='mdp_consommateur2' class='form-control' type='password' value='' size='30' maxlength='45' onblur="checkSamePswd()">
 			
 				<input type='submit' value='Valider' onclick="return checkSubmit()" name='valider' class='btn btn-primary'>
@@ -53,7 +53,7 @@
 				<label for='nom_consommateur'>Nom</label>
 				<input name='nom_consommateur' id='nom_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkLastName()">
 				
-				<label for='prenom_consommateur'>Prenom</label>
+				<label for='prenom_consommateur'>Prénom</label>
 				<input name='prenom_consommateur' id='prenom_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkFirstName()">
 				
 				<label for='adresse_consommateur'>Adresse</label>
@@ -62,7 +62,7 @@
 				<label for='mail_consommateur'>Mail</label>
 				<input name='mail_consommateur' id='mail_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkMail()">
 				
-				<label for='tel_consommateur'>Tel</label>
+				<label for='tel_consommateur'>Téléphone</label>
 				<input name='tel_consommateur' id='tel_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkTel()">
 				
 				<label for='code_postal_consommateur'>Code postal</label>
@@ -71,9 +71,9 @@
 				<label for='ville_consommateur'>Ville</label>
 				<input name='ville_consommateur' id='ville_consommateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkVille()">
 				
-				<label for='mdp_consommateur'>MDP</label>
+				<label for='mdp_consommateur'>Mot de passe</label>
 				<input name='mdp_consommateur' id='mdp_consommateur' class='form-control' type='password' value='' size='30' maxlength='45' onblur="checkPswd()">
-				confirmer MDP
+				Confirmer mot de passe
 				<input name='mdp_consommateur2' id='mdp_consommateur2' class='form-control' type='password' value='' size='30' maxlength='45' onblur="checkSamePswd()">
 			
 				<input type='submit' value='Valider' onclick="return checkSubmit()" name='valider' class='btn btn-primary'>

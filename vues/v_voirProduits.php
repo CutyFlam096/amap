@@ -85,4 +85,8 @@
 			
 		  </div>
 	</div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> edadd1426db1abb94c421838ff8a0a6c56ba6901
