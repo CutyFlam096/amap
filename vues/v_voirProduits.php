@@ -45,19 +45,37 @@
 								</div>
 							</div>
 					
-							<div class='row'>
-								<div class='col-12 col-sm-6 well well-sm'>
-									<form method='post' action='index.php?uc=gestionPanier&action=ajouter&imageProduit=".$produit['image']."&idProduit=".$produit['id']."&libelleProduit=".$produit['libelle']."&descriptionProduit=".$produit['description']."&prixProduit=".$produit['prixunitaire']."'>
-										<input type='number' value=1 id='qte_produit' class='form-control input-sm' name='qte_produit' min='1'>
-										<input type='submit' id='button_produit".$produit['id']."' class='form-control input-sm' value='Ajouter au panier'></input>
-									</form>
-								</div>
-							
-						
-								<div class='col-12 col-sm-6 well'>
-									<div class='col-sm-6' id='pu_produit".$produit['id']."'>Prix au kilo:".$produit['prixunitaire']." euros.
-									</div>
-								<div class='col-sm-6' id='quantite_produit".$produit['id']."'>".$produit['quantite']." kilogramme(s)</div></div>
+							<div class='row'>";
+								
+								if (isset($_SESSION['id_Type_utilisateur']) && $_SESSION['id_Type_utilisateur'] == 2)
+								{
+									echo "<div class='col-12 well'>
+											<div class='col-sm-6' id='pu_produit".$produit['id']."'>Prix au kilo:".$produit['prixunitaire']." euros.
+											</div>
+											
+											<div class='col-sm-6' id='quantite_produit".$produit['id']."'>".$produit['quantite']." kilogramme(s)
+											</div>
+										</div>";
+								}
+								else
+								{
+									echo "<div class='col-12 col-sm-6 well well-sm'>
+											<form method='post' action='index.php?uc=gestionPanier&action=ajouter&imageProduit=".$produit['image']."&idProduit=".$produit['id']."&libelleProduit=".$produit['libelle']."&descriptionProduit=".$produit['description']."&prixProduit=".$produit['prixunitaire']."'>
+												<input type='number' value=1 id='qte_produit' class='form-control input-sm' name='qte_produit' min='1'>
+												<input type='submit' id='button_produit".$produit['id']."' class='form-control input-sm' value='Ajouter au panier'></input>
+											</form>
+										</div>";
+										
+									echo "<div class='col-12 col-sm-6 well'>
+											<div class='col-sm-6' id='pu_produit".$produit['id']."'>Prix au kilo:".$produit['prixunitaire']." euros.
+											</div>
+											
+											<div class='col-sm-6' id='quantite_produit".$produit['id']."'>".$produit['quantite']." kilogramme(s)</div></div>
+											</div>
+										</div>";
+								}
+									
+								echo "
 							</div>
 					</div>";
 					
@@ -68,8 +86,3 @@
 		  </div>
 	</div>
 </div>
-
-    Contact GitHub API Training Shop Blog About 
-
-    © 2017 GitHub, Inc. Terms Privacy Security Status Help 
-
