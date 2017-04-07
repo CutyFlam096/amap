@@ -38,7 +38,7 @@
 					
 					echo "<td>
 								<form method='post' action='index.php?uc=gestionPanier&action=modifier&libelleProduit=".$_SESSION['panier']['libelleProduit'][$i]."'>
-									<input class='form-control' type='number' size='4' name='quantiteProd' value='".$_SESSION['panier']['qteProduit'][$i]."'></br>
+									<input class='form-control' type='number' size='4' name='quantiteProd' min='1' value='".$_SESSION['panier']['qteProduit'][$i]."'></br>
 									<input class='form-control' type='submit' value='modifier'>
 								</form>
 						</td>";

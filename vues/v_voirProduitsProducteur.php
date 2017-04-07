@@ -31,7 +31,7 @@
 										
 											<div class='col-12 col-sm-6 col-md-8 well well-sm' id='description_produit".$produit['id']."'>
 											Description:<br/>
-											<textarea class='form-control' type='hidden' name='description_produit'>".$produit['description']."</textarea>
+											<textarea onblur='descriptionProduitModif()' class='form-control' type='hidden' id='description_produit_modif' name='description_produit_modif'>".$produit['description']."</textarea>
 											
 											</div>
 										</div>
@@ -40,10 +40,10 @@
 									<div class='row'>
 										<div class='col-12 well well-sm'>
 											
-											<input type='number' value=".$produit['quantite']." id='quantite_produit' class='form-control input-sm' name='quantite_produit' min='1'>
-											<input type='number' step='0.1' value=".$produit['prixunitaire']." id='pu_produit' class='form-control input-sm' name='pu_produit' min='0.1'>
+											<input type='number' onblur='puProduitModif()' value=".$produit['quantite']." id='quantite_produit_modif' class='form-control input-sm' name='quantite_produit_modif' min='1'>
+											<input type='number' onblur='qteProduitModif()' step='0.1' value=".$produit['prixunitaire']." id='pu_produit_modif' class='form-control input-sm' name='pu_produit_modif' min='0.1'>
 											<input type='hidden' name='id_produit' value='".$produit['id']."'/>
-											<input type='submit' class='form-control input-sm' value='Appliquer les modifications'></input>
+											<input type='submit' onclick='return checkSubmitProduitModif()' class='form-control input-sm' value='Appliquer les modifications'></input>
 											
 										</div>
 									</div>
