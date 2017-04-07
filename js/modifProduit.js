@@ -1,5 +1,6 @@
 var letters = /^[A-zÀ-ÿ]+([A-zÀ-ÿ- ')]*[A-zÀ-ÿ])*$/;
 var numbers = /^[0-9]+$/;
+var numbersFloat =/^\d{0,2}(?:\.\d{0,2}){0,1}$/;
 
 function descriptionProduitModif()
 {
@@ -25,7 +26,7 @@ function puProduitModif()
 	var error = false;
 	var pu_produit = document.querySelector('[id="pu_produit_modif"]');
 	
-	if (!pu_produit.value.match(numbers) )
+	if (!pu_produit.value.match(numbersFloat) )
 	{
 		document.querySelector('[id="pu_produit_modif"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id="pu_produit_modif"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
@@ -78,7 +79,7 @@ function checkSubmitProduitModif()
 	
 	var pu_produit = document.querySelector('[id="pu_produit_modif"]');
 	
-	if (!pu_produit.value.match(numbers) )
+	if (!pu_produit.value.match(numbersFloat) )
 	{
 		document.querySelector('[id="pu_produit_modif"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id="pu_produit_modif"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
