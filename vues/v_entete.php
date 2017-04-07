@@ -16,6 +16,7 @@
         <script src="js/script.js"></script>
         <script src="js/modificationInfosCompte.js"></script>
 		<script src="js/nouveauProduit.js"></script>
+		<script src="js/modifProduit.js"></script>
 		<script src="js/modal_del.js"></script>
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 		

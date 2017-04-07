@@ -21,9 +21,9 @@ switch($action)
 	}
 	case 'modifierArticle' :
 	{
-		$description=$_REQUEST['description_produit'];
-		$qteProduit=$_REQUEST['quantite_produit'];
-		$prixProduit=$_REQUEST['pu_produit'];
+		$description=$_REQUEST['description_produit_modif'];
+		$qteProduit=$_REQUEST['quantite_produit_modif'];
+		$prixProduit=$_REQUEST['pu_produit_modif'];
 		$idProduit=$_REQUEST['id_produit'];
 		
 		$pdo->modifierArticleBD($description, $qteProduit, $prixProduit, $idProduit);
