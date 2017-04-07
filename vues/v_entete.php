@@ -22,4 +22,5 @@
 		
 		<script src="js/datepicker-fr.js"></script>
 		<script src="js/calendrier.js"></script>
+        <script src="js/gestionCategories.js"></script>
     </head>

@@ -3,8 +3,8 @@
 		<div class='col-xs-12 well'>
 			<p>Ajouter une nouvelle categorie</p>
 			<form method='POST' action='index.php?uc=gererCategorie&action=ajout'>
-				<input type='text' name="nomCateg" class='form-control'>
-				<input type='submit' class='btn btn-primary'>
+				<input id='category_name' type='text' onblur="checkCategory()" name="nomCateg" class='form-control'>
+				<input type='submit' onclick="return checkSubmit()" class='btn btn-primary'>
 			</form>
 		</div>
 			
@@ -20,7 +20,7 @@
 					</form>
 					<p>Catégorie".$cpt.": ".$categorie['libelle']."</p>
 				 </div>";
-			$cpt = $cpt + 1;
+			$cpt++;
 		}
 		?>
 		
