@@ -30,7 +30,7 @@ function descriptionProduit()
 {
 	var error = false;
 	var description_produit = document.querySelector('[id="description_produit"]');
-	alert(description_produit.value.length);
+	
 	if (description_produit.value.length < 10)
 	{
 		document.querySelector('[id="description_produit"]').style.borderColor = "rgba(255, 0, 0, 1)";
