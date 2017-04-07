@@ -4,7 +4,7 @@ if (isset($_SESSION['id']))//si connecté
 {
 	if (count($_SESSION['panier']['libelleProduit']) == 0)
 	{
-		echo "panier vide";
+		include('vues/v_erreurPanierVide.php');
 	}
 	else
 	{
