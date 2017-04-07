@@ -3,7 +3,7 @@
 		<p>
 			Erreur:
 			</br>
-			Veuillez vous connecter pour pouvoir passer une commande.
+			L'ancien mot de passe est incorrect ou les nouveaux mots de passe ne sont pas identique.
 		</p>
 	</div>
 </div>

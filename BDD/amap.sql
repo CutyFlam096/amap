@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 06 Avril 2017 à 16:32
+-- Généré le :  Ven 07 Avril 2017 à 14:40
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -116,10 +116,10 @@ CREATE TABLE IF NOT EXISTS `produit` (
 --
 
 INSERT INTO `produit` (`id`, `libelle`, `description`, `prixunitaire`, `quantite`, `id_utilisateur`, `id_categorie`, `image`) VALUES
-(1, 'Patate', 'Des patates', 0.5, 850, 2, 1, 'img/produits/patate.jpg'),
+(1, 'Patate', 'Des patates', 1, 850, 2, 1, 'img/produits/patate.jpg'),
 (2, 'Pomme', 'Des pommes', 0.7, 620, 2, 2, 'img/produits/pomme.jpg'),
 (4, 'Cerise', 'Des cerises.', 0.4, 741, 2, 2, 'img/produits/cerise.jpg'),
-(5, 'Asperge', 'Des asperges.', 0.8, 455, 2, 1, 'img/produits/asperge.jpg'),
+(5, 'Asperge', 'Des asp', 0.8, 1, 2, 1, 'img/produits/asperge.jpg'),
 (6, 'Betterave', 'Des betteraves.', 0.9, 960, 2, 1, 'img/produits/betterave.jpg'),
 (7, 'Carotte', 'Des carottes.', 1, 123, 2, 1, 'img/produits/carotte.jpg'),
 (8, 'Figue', 'Des figues', 1, 12, 2, 2, 'img/produits/figue.jpg'),
@@ -189,9 +189,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `adresse`, `mail`, `tel`, `codepostal`, `ville`, `mdp`, `login`, `id_Type_utilisateur`) VALUES
-(1, 'Fouque', 'Patrice', '52 rue je sais pas ou', 'jesaispas@gmail.com', '0631313131', 45000, 'Orléans', '$2y$10$NVKN05fVdejwfrcFUXv6jOqQgezQhvdTUVUSSSrdwwyygFANhkB4G', 'Patrice', 1),
-(2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', '0632323232', 45000, 'Orléans', '$2y$10$NVKN05fVdejwfrcFUXv6jOqQgezQhvdTUVUSSSrdwwyygFANhkB4G', 'Robin', 2),
-(3, 'Benardeau', 'Quentin', '54 rue je sais pas ou', 'jesaispas@gmail.com', '0634343434', 45000, 'Orléans', '$2y$10$U1v6ZyL6eHsW9bNcTK3ReOeJtr4lI6qun.JcmJKZ1T6ZVkXeaG0w6', 'Quentin', 3),
+(1, 'Fouque', 'Patrice', '52 rue je sais pas ou', 'jesaispas@gmail.com', '0631313131', 45000, 'Orléans', '$2y$10$ueSv5VScYSyw8kjtfM3tZeiWpV1tOYLL9vPkH21ZOyPRLtl0tEYNa', 'Administrateur', 1),
+(2, 'Trassard', 'Robin', 'une autre rue pour tester la modification :)', 'jesaispas@gmail.com', '0632323232', 45000, 'Orléans', '$2y$10$hxblaUNVi/i9j4pMZTgJouqMnp2p9l5SlOzS1UaCIAYX3SkQ4JNI2', 'Producteur', 2),
+(3, 'Benardeau', 'Quentin', '54 rue je sais pas ou', 'jesaispas@gmail.com', '0634343434', 45000, 'Orléans', '$2y$10$Yd07ssc8fOc3s.XRENib4u.YmWUXT.ByiUt.KTXyqNN6LJ5v6Zdx.', 'Consommateur', 3),
 (7, 'testmdp', 'testmdp', 'testmdp', 'testmdp@testmdp.fr', '0631561213', 45000, 'testmdp', '$2y$10$jSel/6LKmVhhe.08KiOMbulz.WjgiLzRh6YdEpwNnvWGGCHe2uTI6', 'testmdp', 1);
 
 --
