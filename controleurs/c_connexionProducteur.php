@@ -79,7 +79,7 @@ switch($action)
 		}
 		else
 		{
-			echo "Erreur mdp ou pseudo!";
+			include_once('vues/v_erreurMdpPseudo.php');
 		}
 	}
 }

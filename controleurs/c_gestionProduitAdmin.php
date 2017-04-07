@@ -19,23 +19,33 @@ switch($action)
 		
 		$insertOK = true;
 		
-		//verifier si un produit du meme nom existe dans la bdd
-		if($pdo->verifProduitExiste($_REQUEST['libelle_produit']) == true)
-		{//erreut nom en BDD
+		//si aucune image
+		if ($_FILES["image_produit"]["name"] == "")
+		{
 			$insertOK = false;
-			include("vues/v_erreur_nom_bdd.php");
+			include("vues/v_erreur_absence_img.php");
 		}
-		if(in_array($type_Image, $type_autorise) == false)//si le type du fichier est dans $type_aurotise, on l'ajoute et on cree le produit
-		{//erreur extension fichier
-			$insertOK = false;
-			include("vues/v_erreur_type_image.php");
+		else
+		{
+			//verifier si un produit du meme nom existe dans la bdd
+			if($pdo->verifProduitExiste($_REQUEST['libelle_produit']) == true)
+			{//erreut nom en BDD
+				$insertOK = false;
+				include("vues/v_erreur_nom_bdd.php");
+			}
+			if(in_array($type_Image, $type_autorise) == false)//si le type du fichier est dans $type_aurotise, on l'ajoute et on cree le produit
+			{//erreur extension fichier
+				$insertOK = false;
+				include("vues/v_erreur_type_image.php");
+			}
+			
+			if(file_exists($fichier_upload))//si le fichier existe
+			{//erreur nom image
+				$insertOK = false;
+				include("vues/v_erreur_nom_image.php");
+			}
 		}
 		
-		if(file_exists($fichier_upload))//si le fichier existe
-		{//erreur nom image
-			$insertOK = false;
-			include("vues/v_erreur_nom_image.php");
-		}
 		
 		if ($insertOK == true)//si aucune erreur
 		{
@@ -54,7 +64,6 @@ switch($action)
 	}
 	case 'voir' :
 	{
-		
 		include_once('vues/v_utilProduits.php');
 		break;
 	}
