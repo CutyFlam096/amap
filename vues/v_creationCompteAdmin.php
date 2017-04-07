@@ -8,7 +8,7 @@
 				<label for='nom_utilisateur'>Nom</label>
 				<input name='nom_utilisateur' id='nom_utilisateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkLastName()">
 				
-				<label for='prenom_utilisateur'>Prenom</label>
+				<label for='prenom_utilisateur'>Prénom</label>
 				<input name='prenom_utilisateur' id='prenom_utilisateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkFirstName()">
 				
 				<label for='adresse_utilisateur'>Adresse</label>
@@ -17,7 +17,7 @@
 				<label for='mail_utilisateur'>Mail</label>
 				<input name='mail_utilisateur' id='mail_utilisateur' type='text' class='form-control' placeholder="Le login et/ou le mail que vous avez rentré précédemment existe(nt) déjà" size='30' maxlength='45' onblur="checkMail()" style="border-color: rgba(255, 0, 0, 1); box-shadow: 0 0 8px rgba(255, 0, 0, 1);">
 				
-				<label for='tel_utilisateur'>Tel</label>
+				<label for='tel_utilisateur'>Téléphone</label>
 				<input name='tel_utilisateur' id='tel_utilisateur' type='text' class='form-control' size='30' maxlength='45' onblur="checkTel()">
 				
 				<label for='code_postal_utilisateur'>Code postal</label>
@@ -37,9 +37,9 @@
 				</select>
 				</br>
 				
-				<label for='mdp_utilisateur'>MDP</label>
+				<label for='mdp_utilisateur'>Mot de passe</label>
 				<input name='mdp_utilisateur' id='mdp_utilisateur' class='form-control' type='password' value='' size='30' maxlength='45' onblur="checkPswd()">
-				confirmer MDP
+				Confirmer mot de passe
 				<input name='mdp_utilisateur2' id='mdp_utilisateur2' class='form-control' type='password' value='' size='30' maxlength='45' onblur="checkSamePswd()">
 			
 				<input type='submit' value='Valider' onclick="return checkSubmit()" name='valider' class='btn btn-primary'>

@@ -13,6 +13,6 @@
 			</form>
 			</br>
 			<p>Pas de compte producteur ?</p>
-			<a id='inscription_producteur' href='index.php?uc=connexionProducteur&action=formInscription'>Cliquez ici!</a>
+			<a id='inscription_producteur' href='index.php?uc=connexionProducteur&action=formInscription'>Cliquez ici !</a>
 	</div>
 </div>

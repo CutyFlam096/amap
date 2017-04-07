@@ -3,7 +3,7 @@
 		<p>
 			Erreur:
 			</br>
-			une image porte deja ce nom.
+			Une image porte deja ce nom.
 		</p>
 	</div>
 </div>
