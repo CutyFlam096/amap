@@ -38,7 +38,7 @@
 							<div class='row'>
 								<div class='col-12'>
 									<div class='col-12 col-sm-6 col-md-4 well well-sm'>
-										<img class='imageproduit img-rounded' src= 'img/produits/".mb_strtolower($produit['libelle']).".jpg' alt='' />
+										<img class='imageproduit img-rounded' src= '".$produit['image']."' alt='' />
 									</div>
 								
 									<div class='col-12 col-sm-6 col-md-8 well well-sm' id='description_produit".$produit['id']."'>Description:<br/>".$produit['description']."</div>
@@ -70,7 +70,7 @@
 											<div class='col-sm-6' id='pu_produit".$produit['id']."'>Prix au kilo:".$produit['prixunitaire']." euros.
 											</div>
 											
-											<div class='col-sm-6' id='quantite_produit".$produit['id']."'>".$produit['quantite']." kilogramme(s)</div></div>
+											<div class='col-sm-6' id='quantite_produit".$produit['id']."'>".$produit['quantite']." kilogramme(s)
 											</div>
 										</div>";
 								}
@@ -85,8 +85,5 @@
 			
 		  </div>
 	</div>
-<<<<<<< HEAD
 </div>
-=======
 </div>
->>>>>>> edadd1426db1abb94c421838ff8a0a6c56ba6901

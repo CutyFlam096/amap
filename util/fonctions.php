@@ -2,9 +2,9 @@
 class AMAP
 {
   	private static $serveur='mysql:host=localhost';
-  	private static $bdd='dbname=amap';
-  	private static $user='root' ;
-  	private static $mdp='' ;
+  	private static $bdd='dbname=bdfouque';
+  	private static $user='bdfouque' ;
+  	private static $mdp='bdfouque' ;
 	private static $monPdo;
 	private static $monAMAP = null;
 		
@@ -48,7 +48,7 @@ class AMAP
 
 	public function get_categ() //Donne les categorie de produit a afficher dans le nav
 	{
-	    $req = AMAP::$monPdo->prepare('SELECT id, libelle FROM categorie ORDER BY libelle');
+	    $req = AMAP::$monPdo->prepare('SELECT id, libelle FROM amap_categorie ORDER BY libelle');
 	    $req->execute();
 	    $categories = $req->fetchAll();
 	    return $categories;
@@ -56,7 +56,7 @@ class AMAP
 	
 	public function getLivraisonDuJour()//renvoi les livraisons du jour pour la generation du fichier xml
 	{
-		$req = AMAP::$monPdo->prepare('SELECT * FROM livraison WHERE dateLivraison = CURRENT_DATE ');
+		$req = AMAP::$monPdo->prepare('SELECT * FROM amap_livraison WHERE dateLivraison = CURRENT_DATE ');
 		$req->execute();
 		$livraisons = $req->fetchAll();
 		return $livraisons;
@@ -64,7 +64,7 @@ class AMAP
 	
 	public function getColis($idLivraison)
 	{
-		$req = AMAP::$monPdo->prepare('SELECT * FROM colis WHERE id_livraison ='.$idLivraison);
+		$req = AMAP::$monPdo->prepare('SELECT * FROM amap_colis WHERE id_livraison ='.$idLivraison);
 		$req->execute();
 		$lesColis = $req->fetchAll();
 		return $lesColis;
@@ -72,7 +72,7 @@ class AMAP
 	
 	public function getUtil($id_util)
 	{
-		$req = AMAP::$monPdo->prepare('SELECT * FROM utilisateur WHERE id='.$id_util);
+		$req = AMAP::$monPdo->prepare('SELECT * FROM amap_utilisateur WHERE id='.$id_util);
 		$req->execute();
 		$util = $req->fetch();
 		return $util;
@@ -83,10 +83,10 @@ class AMAP
 	    $uneCateg = (int) $uneCateg;
 
 		if($uneCateg==0)
-		{$req = 'SELECT * FROM produit ORDER BY libelle';}
+		{$req = 'SELECT * FROM amap_produit ORDER BY libelle';}
 
 		else
-		{$req = "SELECT * FROM produit WHERE produit.id_categorie = '".$uneCateg."' ORDER BY libelle";}
+		{$req = "SELECT * FROM amap_produit WHERE produit.id_categorie = '".$uneCateg."' ORDER BY libelle";}
 		$req = AMAP::$monPdo->prepare($req);
 	    $req->execute();
 	    $produits = $req->fetchAll();
@@ -96,7 +96,7 @@ class AMAP
 
 	public function verifQteProduit($libelle, $qte)
 	{
-		$req = "SELECT * FROM produit WHERE libelle = '".$libelle."'";
+		$req = "SELECT * FROM amap_produit WHERE libelle = '".$libelle."'";
 		$req = AMAP::$monPdo->prepare($req);
 		$req -> execute();
 		$produit = $req->fetch();
@@ -111,7 +111,7 @@ class AMAP
 	{
 	    $unId = (int) $unId;
 
-		$req = "SELECT * FROM produit WHERE produit.id_utilisateur = '".$unId."' ORDER BY libelle";
+		$req = "SELECT * FROM amap_produit WHERE produit.id_utilisateur = '".$unId."' ORDER BY libelle";
 		$req = AMAP::$monPdo->prepare($req);
 	    $req->execute();
 	    $produits = $req->fetchAll();
@@ -123,7 +123,7 @@ class AMAP
 	{
 		$newMdp = password_hash($newMdp, PASSWORD_DEFAULT);
 		
-		$req = AMAP::$monPdo->prepare('UPDATE utilisateur
+		$req = AMAP::$monPdo->prepare('UPDATE amap_utilisateur
 							SET nom= :nom,
 							prenom= :prenom,
 							adresse= :adresse,
@@ -164,7 +164,7 @@ class AMAP
 	
 	public function set_param_compte_no_mdp($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login)
 	{
-		$req = AMAP::$monPdo->prepare('UPDATE utilisateur
+		$req = AMAP::$monPdo->prepare('UPDATE amap_utilisateur
 							SET nom= :nom,
 							prenom= :prenom,
 							adresse= :adresse,
@@ -202,7 +202,7 @@ class AMAP
 
 	public function set_connexion($unLogin, $unMdp)//fait la connexion en consommateur, producteur ou admib
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur WHERE login=:login");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_utilisateur WHERE login=:login");
 
 		$req->execute(array(
 			'login' => $unLogin,
@@ -244,7 +244,7 @@ class AMAP
 
 	public function verifierCompteExistant($login, $mail)
 	{
-		$req = AMAP::$monPdo->prepare("SELECT login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
+		$req = AMAP::$monPdo->prepare("SELECT amap_login, mail FROM utilisateur WHERE login=:login OR mail=:mail");
 
 		$req->execute(array(
 			'login' => $login,
@@ -266,7 +266,7 @@ class AMAP
 	{
 		$hashMdp=password_hash($mdp, PASSWORD_DEFAULT);
 		
-	    $req = AMAP::$monPdo->prepare("INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
+	    $req = AMAP::$monPdo->prepare("INSERT INTO amap_utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 								  Value(:nom, :prenom, :adresse, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
 			
 			$req->execute(array(
@@ -413,7 +413,7 @@ class AMAP
 		list($jour, $mois, $annee) = explode('/', $d);
 		$uneDate = $annee."-".$mois."-".$jour;
 		
-		$req = AMAP::$monPdo->prepare("INSERT INTO livraison (id_utilisateur, dateLivraison) VALUES (".$unIdUtil.", '".$uneDate."')");
+		$req = AMAP::$monPdo->prepare("INSERT INTO amap_livraison (id_utilisateur, dateLivraison) VALUES (".$unIdUtil.", '".$uneDate."')");
 		$req->execute();
 		
 		return AMAP::$monPdo -> lastInsertId();
@@ -421,16 +421,16 @@ class AMAP
 
 	public function nouvColis($montantTotal, $idLivraison, $quantiteProd, $idProduit)
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM produit WHERE id = :unId");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_produit WHERE id = :unId");
 		$req->execute(array('unId' => $idProduit));
 		$produit = $req->fetch();
 		
 		$nouvelleQuantite = $produit['quantite'] - $quantiteProd; //calcule la nouvelle quantite du produit
 		
-		$req1 = AMAP::$monPdo->prepare("UPDATE produit SET quantite = :qte WHERE id = :id");
+		$req1 = AMAP::$monPdo->prepare("UPDATE amap_produit SET quantite = :qte WHERE id = :id");
 		$req1->execute(array('qte' => $nouvelleQuantite, 'id' => $idProduit));
 		
-		$req2 = AMAP::$monPdo->prepare("INSERT INTO colis (montanttotal,id_livraison,quantite,id_produit) VALUES (:montant, :idLiv, :qte, :idProd)");
+		$req2 = AMAP::$monPdo->prepare("INSERT INTO amap_colis (montanttotal,id_livraison,quantite,id_produit) VALUES (:montant, :idLiv, :qte, :idProd)");
 		$req2->execute(array(
 			'montant' => $montantTotal,
 			'idLiv' => $idLivraison,
@@ -444,7 +444,7 @@ class AMAP
 	
 	public function verifProduitExiste($libelle)
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM produit");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_produit");
 		$req->execute();
 		
 		$produits = $req->fetchAll();
@@ -460,9 +460,9 @@ class AMAP
 	public function nouvProduit($lib, $des, $pu, $qte, $util, $categ, $image)
 	{
 		//INSERT INTO produit (libelle,description,prixunitaire,quantite,id_utilisateur ,id_categorie, image) VALUES ('test', 'azert azertyu zer', 52, 522, 2, 2, 'img/produits/chat-boule-poil.jpg');
-		$reqq = "INSERT INTO produit (libelle,description,prixunitaire,quantite,id_utilisateur,id_categorie,image) VALUES ('".$lib."','".$des."', '".$pu."','".$qte."', '".$util."', '".$categ."', '".$image."')";
+		$reqq = "INSERT INTO amap_produit (libelle,description,prixunitaire,quantite,id_utilisateur,id_categorie,image) VALUES ('".$lib."','".$des."', '".$pu."','".$qte."', '".$util."', '".$categ."', '".$image."')";
 		
-		$req = AMAP::$monPdo->prepare("INSERT INTO produit (libelle,description,prixunitaire,quantite,id_utilisateur,id_categorie,image) VALUES ('".$lib."','".$des."', '".$pu."','".$qte."', '".$util."', '".$categ."', '".$image."')");
+		$req = AMAP::$monPdo->prepare("INSERT INTO amap_produit (libelle,description,prixunitaire,quantite,id_utilisateur,id_categorie,image) VALUES ('".$lib."','".$des."', '".$pu."','".$qte."', '".$util."', '".$categ."', '".$image."')");
 		$req->execute();
 		
 		return true;
@@ -470,26 +470,26 @@ class AMAP
 	
 	public function supprimerArticleBD($id)
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM produit where id = :idProduit");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_produit where id = :idProduit");
 		$req->execute(array(':idProduit' => $id));
 		
 		$produit = $req->fetch();
 		$image = $produit['image'];
 		unlink ($image);
 		
-		$req2 = AMAP::$monPdo->prepare("DELETE FROM produit where id = :idProduit");
+		$req2 = AMAP::$monPdo->prepare("DELETE FROM amap_produit where id = :idProduit");
 		$req2->execute(array(':idProduit' => $id));
 	}
 	
 	public function modifierArticleBD($description, $qte, $prix, $id)
 	{
-		$req = AMAP::$monPdo->prepare("UPDATE produit SET description = :desc, quantite = :qte, prixunitaire = :prix WHERE id = :id");
+		$req = AMAP::$monPdo->prepare("UPDATE amap_produit SET description = :desc, quantite = :qte, prixunitaire = :prix WHERE id = :id");
 		$req->execute(array(':desc' => $description,':qte' => $qte,':prix' => $prix,':id' => $id));
 	}
 	
 	public function supprimerCategorieBD ($id)
 	{	
-		$req = AMAP::$monPdo->prepare("SELECT * FROM produit where id_categorie = :idCateg");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_produit where id_categorie = :idCateg");
 		$req->execute(array(':idCateg' => $id));
 		
 		$produits = $req->fetchAll();
@@ -497,19 +497,19 @@ class AMAP
 		foreach ($produits as $produit)
 		{
 			
-			$req = AMAP::$monPdo->prepare("DELETE FROM colis where id_Produit = :idProduit");
+			$req = AMAP::$monPdo->prepare("DELETE FROM amap_colis where id_Produit = :idProduit");
 			$req->execute(array(':idProduit' => $produit['id']));
 			
 			amap::supprimerArticleBD($produit['id']);
 		}
 		
-		$req3 = AMAP::$monPdo->prepare("DELETE FROM categorie where id = :idCateg");
+		$req3 = AMAP::$monPdo->prepare("DELETE FROM amap_categorie where id = :idCateg");
 		$req3->execute(array(':idCateg' => $id));
 	}
 	
 	public function ajouterCategorieBD($nomCateg)
 	{
-		$req = AMAP::$monPdo->prepare("INSERT INTO categorie (libelle) VALUES (:nomCateg)");
+		$req = AMAP::$monPdo->prepare("INSERT INTO amap_categorie (libelle) VALUES (:nomCateg)");
 		$req->execute(array(':nomCateg' => $nomCateg));
 		
 		return true;
@@ -517,7 +517,7 @@ class AMAP
 	
 	public function get_util()
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM utilisateur where id != :idUtil");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_utilisateur where id != :idUtil");
 		$req->execute(array(':idUtil' => $_SESSION['id']));
 		
 		$utilisateurs = $req->fetchAll();
@@ -526,29 +526,29 @@ class AMAP
 	
 	public function supprimerUtilBD($id)
 	{
-		$req1 = AMAP::$monPdo->prepare("DELETE FROM livraison where id_utilisateur = :idUtil");
+		$req1 = AMAP::$monPdo->prepare("DELETE FROM amap_livraison where id_utilisateur = :idUtil");
 		$req1->execute(array(':idUtil' => $id));
 		
-		$req1 = AMAP::$monPdo->prepare("SELECT * FROM produit where id_utilisateur = :idUtil");
+		$req1 = AMAP::$monPdo->prepare("SELECT * FROM amap_produit where id_utilisateur = :idUtil");
 		$req1->execute(array(':idUtil' => $id));
 		
 		$produits = $req1->fetchAll();
 		
 		foreach ($produits as $produit)
 		{
-			$req2 = AMAP::$monPdo->prepare("DELETE FROM colis where id_Produit = :idProduit");
+			$req2 = AMAP::$monPdo->prepare("DELETE FROM amap_colis where id_Produit = :idProduit");
 			$req2->execute(array(':idProduit' => $produit['id']));
 			
 			amap::supprimerArticleBD($produit['id']);
 		}
 		
-		$req3 = AMAP::$monPdo->prepare("DELETE FROM utilisateur where id = :idUtil");
+		$req3 = AMAP::$monPdo->prepare("DELETE FROM amap_utilisateur where id = :idUtil");
 		$req3->execute(array(':idUtil' => $id));
 	}
 	
 	public function getTypeUtil()
 	{
-		$req = AMAP::$monPdo->prepare("SELECT * FROM type_utilisateur");
+		$req = AMAP::$monPdo->prepare("SELECT * FROM amap_type_utilisateur");
 		$req->execute();
 		
 		$types = $req->fetchAll();
@@ -557,7 +557,7 @@ class AMAP
 	
 	public function modifierUtilAdminBD($id, $nom, $prenom, $adresse, $mail, $tel, $cp, $ville, $login, $type)
 	{
-		$req = AMAP::$monPdo->prepare("UPDATE utilisateur set nom = :nom, prenom = :prenom, adresse = :adresse, mail = :mail, tel = :tel, codepostal = :cp, ville = :ville, login = :login, id_Type_utilisateur = :type WHERE id = :id");
+		$req = AMAP::$monPdo->prepare("UPDATE amap_utilisateur set nom = :nom, prenom = :prenom, adresse = :adresse, mail = :mail, tel = :tel, codepostal = :cp, ville = :ville, login = :login, id_Type_utilisateur = :type WHERE id = :id");
 		$req->execute(
 		array(
 			':nom' => $nom,
@@ -579,7 +579,7 @@ class AMAP
 	{
 		$mdp = password_hash($mdp, PASSWORD_DEFAULT);
 		$req = AMAP::$monPdo->prepare(
-		"INSERT INTO utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
+		"INSERT INTO amap_utilisateur(nom, prenom, adresse, mail, tel, codepostal, ville, mdp, login, id_Type_utilisateur)
 		Value(:nom, :prenom, :addr, :mail, :tel, :codePostal, :ville, :mdp, :login, :type)");
 			
 			$req->execute(array(
@@ -600,7 +600,7 @@ class AMAP
 	
 	public function get_produit_admin()
 	{
-		$req = "SELECT * FROM produit";
+		$req = "SELECT * FROM amap_produit";
 		$req = AMAP::$monPdo->prepare($req);
 	    $req->execute();
 	    $produits = $req->fetchAll();
