@@ -30,10 +30,10 @@
 				
 				<label for='ancien_mdp'>Mot de passe</label></br>
 				Ancien mot de passe<input name='ancien_mdp' id='ancien_mdp' type='password' class='form-control' size='30' maxlength='45' />
-				Nouveau mot de passe<input name='nouv_mdp'  id='nouv_mdp' type='password' class='form-control' size='30' maxlength='45' onblur='checkPswd()'/>
-				Confirmer Nouveau MDP<input name='nouv_mdp2' id='nouv_mdp2' type='password' class='form-control' size='30' maxlength='45' onblur='checkSamePswd()'/>
+				Nouveau mot de passe<input name='nouv_mdp'  id='nouv_mdp' type='password' class='form-control' size='30' maxlength='45'/>
+				Confirmer Nouveau MDP<input name='nouv_mdp2' id='nouv_mdp2' type='password' class='form-control' size='30' maxlength='45'/>
 				</br>
-				<input type='submit' value='Valider les modifications' class='btn btn-primary'>
+				<input type='submit' onclick='return checkSubmitInfosCompte()' value='Valider les modifications' class='btn btn-primary'>
 				<input type='reset' value='Annuler les modifications' class='btn btn-primary'>
 			</form>
 		</div>

@@ -6,7 +6,7 @@ function checkLastName()
 {
 	var error = false;
 	var lastName = document.querySelector('[id^="nom_"]');
-	if ( lastName.value.length == 1 )
+	if ( lastName.value.length == 1 || lastName.value == "")
 	{
 		document.querySelector('[id^="nom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id^="nom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
@@ -20,7 +20,7 @@ function checkLastName()
 		alert("Ce champ doit contenir seulement des lettres");
 		error = true;
 	}
-	if ( lastName.value == "" || error == false )
+	if (error == false )
 	{
 		document.querySelector('[id^="nom_"]').style.border = "1px solid #CCC";
 		document.querySelector('[id^="nom_"]').style.boxShadow = "initial";
@@ -31,7 +31,7 @@ function checkFirstName()
 {
 	var error = false;
 	var firstName = document.querySelector('[id^="prenom_"]');
-	if ( firstName.value.length == 1 )
+	if ( firstName.value.length == 1 || firstName.value == "")
 	{
 		error = true;
 		document.querySelector('[id^="prenom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
@@ -45,7 +45,7 @@ function checkFirstName()
 		document.querySelector('[id^="prenom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
 		alert("Ce champ doit contenir seulement des lettres");
 	}
-	if ( firstName.value == "" || error == false )
+	if (error == false )
 	{
 		document.querySelector('[id^="prenom_"]').style.border = "1px solid #CCC";
 		document.querySelector('[id^="prenom_"]').style.boxShadow = "initial";
@@ -56,41 +56,6 @@ function checkLogin()
 {
 	document.querySelector('[id^="login_"]').style.border = "1px solid #CCC";
 	document.querySelector('[id^="login_"]').style.boxShadow = "none";
-};
-
-function checkPswd()
-{
-	var error = false;
-	var pswd = document.querySelector('[id^="mdp_"]');
-	if( !pswd.value == "" && pswd.value.length < 6 )
-	{
-		error = true;
-		document.querySelector('[id^="mdp_"]').style.borderColor = "rgba(255, 0, 0, 1)";
-		document.querySelector('[id^="mdp_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		alert("Vous devez rentrer au moins 6 caractères");
-	}
-	if ( pswd.value == "" || error == false )
-	{
-		document.querySelector('[id^="mdp_"]').style.border = "1px solid #CCC";
-		document.querySelector('[id^="mdp_"]').style.boxShadow = "initial";
-	}
-};
-
-function checkSamePswd()
-{
-    var pswd1 = document.querySelector('[id^="mdp_"]');
-    var pswd2 = document.querySelector('[id^="mdp_"][id$="2"]');
-    if( !pswd1.value == "" && pswd1.value != pswd2.value )
-    {
-    	document.querySelector('[id^="mdp_"][id$="2"]').style.borderColor = "rgba(255, 0, 0, 1)";
-			document.querySelector('[id^="mdp_"][id$="2"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-      alert("Veuillez rentrer le même mot de passe que celui rentré précédemment");
-    }
-    else
-    {
-    	document.querySelector('[id^="mdp_"][id$="2"]').style.border = "1px solid #CCC";
-			document.querySelector('[id^="mdp_"][id$="2"]').style.boxShadow = "initial";
-    }
 };
 
 function checkMail()
@@ -110,14 +75,32 @@ function checkMail()
 
 function checkAdresse()
 {
-	document.querySelector('[id^="adresse_"]').style.border = "1px solid #CCC";
-	document.querySelector('[id^="adresse_"]').style.boxShadow = "initial";
+	if( document.querySelector('[id^="adresse_"]').value.length < 8 || document.querySelector('[id^="adresse_"]').value == "")
+	{
+		document.querySelector('[id^="adresse_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="adresse_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Veuillez rentrer une adresse valide.");
+	}
+	else
+	{
+		document.querySelector('[id^="adresse_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="adresse_"]').style.boxShadow = "initial";
+	}
 };
 
 function checkVille()
 {
-	document.querySelector('[id^="ville_"]').style.border = "1px solid #CCC";
-	document.querySelector('[id^="ville_"]').style.boxShadow = "initial";
+	if(document.querySelector('[id^="ville_"]').value == "")
+	{
+		document.querySelector('[id^="ville_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="ville_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Veuillez rentrer un ville.");
+	}
+	else
+	{
+		document.querySelector('[id^="ville_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="ville_"]').style.boxShadow = "initial";
+	}
 };
 
 function checkCodePostal()
@@ -147,35 +130,34 @@ function checkCodePostal()
 
 function checkPhone()
 {
-	document.querySelector('[id^="tel_"]').style.border = "1px solid #CCC";
-	document.querySelector('[id^="tel_"]').style.boxShadow = "initial";
+	var error = false;
+	var tel = document.querySelector('[id^="tel_"]');
+	if ( tel.value.length != 10 && tel.value.length > 0 )
+	{
+		error = true;
+		document.querySelector('[id^="tel_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="tel_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Votre numéro de téléphone doit comprendre 10 chiffres");
+	}
+	if ( !tel.value == "" && !tel.value.match(numbers) )
+	{
+		error = true;
+		document.querySelector('[id^="tel_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="tel_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Votre numéro de téléphone ne doit comprendre que des chiffres");
+	}
+	if (error == false )
+	{
+		document.querySelector('[id^="tel_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="tel_"]').style.boxShadow = "initial";
+	}
 };
 
-function checkSubmit()
+function checkSubmitInfosCompte()
 {
 	var error = false;
-
-	if ( document.querySelector('[id^="nom_"]').value == "" || document.querySelector('[id^="nom_"]').value.length < 2 || !document.querySelector('[id^="nom_"]').value.match(letters) )
-	{
-		document.querySelector('[id^="nom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
-		document.querySelector('[id^="nom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
-	}
-
-	if ( document.querySelector('[id^="prenom_"]').value == "" || document.querySelector('[id^="prenom_"]').value.length < 2 || !document.querySelector('[id^="prenom_"]').value.match(letters) )
-	{
-		document.querySelector('[id^="prenom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
-		document.querySelector('[id^="prenom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
-	}
-
-	if ( document.querySelector('[id^="login_"]').value == "" )
-	{
-		document.querySelector('[id^="login_"]').style.borderColor = "rgba(255, 0, 0, 1)";
-		document.querySelector('[id^="login_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
-	}
-
+	
+	//verif mdp
 	if ( document.querySelector('[id^="mdp_"]').value.length < 6 )
 	{
 		document.querySelector('[id^="mdp_"]').style.borderColor = "rgba(255, 0, 0, 1)";
@@ -191,42 +173,135 @@ function checkSubmit()
 		document.querySelector('[id^="mdp_"][id$="2"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
 		error = true;
 	}
-
-	if ( !document.querySelector('[id^="mail_"]').value.match(regexEmail) )
+	
+	//verif nom
+	var lastName = document.querySelector('[id^="nom_"]');
+	if ( lastName.value.length == 1 || lastName.value == "")
+	{
+		document.querySelector('[id^="nom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="nom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Vous devez rentrer au moins 2 caractères");
+		error = true;
+	}
+	else if ( !lastName.value == "" && !lastName.value.match(letters) )
+	{
+		document.querySelector('[id^="nom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="nom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Ce champ doit contenir seulement des lettres");
+		error = true;
+	}
+	if (error == false )
+	{
+		document.querySelector('[id^="nom_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="nom_"]').style.boxShadow = "initial";
+	}
+	
+	//verif prenom
+	var firstName = document.querySelector('[id^="prenom_"]');
+	if ( firstName.value.length == 1 || firstName.value == "")
+	{
+		error = true;
+		document.querySelector('[id^="prenom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="prenom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Vous devez rentrer au moins 2 caractères");
+	}
+	else if ( !firstName.value == "" && !firstName.value.match(letters) )
+	{
+		error = true;
+		document.querySelector('[id^="prenom_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="prenom_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Ce champ doit contenir seulement des lettres");
+	}
+	if (error == false )
+	{
+		document.querySelector('[id^="prenom_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="prenom_"]').style.boxShadow = "initial";
+	}
+	
+	//verif mail
+	if( !document.querySelector('[id^="mail_"]').value.match(regexEmail) )
 	{
 		document.querySelector('[id^="mail_"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id^="mail_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
+		alert("Veuillez rentrer un e-mail correct");
 	}
-
-	if ( document.querySelector('[id^="adresse_"]').value == "" )
+	else
+	{
+		document.querySelector('[id^="mail_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="mail_"]').style.boxShadow = "none";
+	}
+	
+	//varif adresse
+	if( document.querySelector('[id^="adresse_"]').value.length < 8 || document.querySelector('[id^="adresse_"]').value == "")
 	{
 		document.querySelector('[id^="adresse_"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id^="adresse_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
+		alert("Veuillez rentrer une adresse valide.");
 	}
-
-	if ( document.querySelector('[id^="ville_"]').value == "" )
+	else
+	{
+		document.querySelector('[id^="adresse_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="adresse_"]').style.boxShadow = "initial";
+	}
+	
+	//verif ville_
+	if(document.querySelector('[id^="ville_"]').value == "")
 	{
 		document.querySelector('[id^="ville_"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id^="ville_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
+		alert("Veuillez rentrer un ville.");
 	}
-
-	if ( document.querySelector('[id^="code_postal_"]').value == "" )
+	else
 	{
+		document.querySelector('[id^="ville_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="ville_"]').style.boxShadow = "initial";
+	}
+	
+	//verif cp
+	var cp = document.querySelector('[id^="code_postal_"]');
+	if ( cp.value.length != 5 && cp.value.length > 0 )
+	{
+		error = true;
 		document.querySelector('[id^="code_postal_"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id^="code_postal_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
+		alert("Votre code postal doit comprendre 5 caractères");
 	}
-
-	if ( document.querySelector('[id^="tel_"]').value == "" )
+	if ( !cp.value == "" && !cp.value.match(numbers) )
 	{
+		error = true;
+		document.querySelector('[id^="code_postal_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="code_postal_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Votre code postal doit ne doit comprendre que des chiffres");
+	}
+	if ( cp.value == "" || error == false )
+	{
+		document.querySelector('[id^="code_postal_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="code_postal_"]').style.boxShadow = "initial";
+	}
+	
+	//varif phone
+	var tel = document.querySelector('[id^="tel_"]');
+	if ( tel.value.length != 10 && tel.value.length > 0 )
+	{
+		error = true;
 		document.querySelector('[id^="tel_"]').style.borderColor = "rgba(255, 0, 0, 1)";
 		document.querySelector('[id^="tel_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
-		error = true;
+		alert("Votre numéro de téléphone doit comprendre 10 chiffres");
 	}
-
+	if ( !tel.value == "" && !tel.value.match(numbers) )
+	{
+		error = true;
+		document.querySelector('[id^="tel_"]').style.borderColor = "rgba(255, 0, 0, 1)";
+		document.querySelector('[id^="tel_"]').style.boxShadow = "0 0 8px rgba(255, 0, 0, 1)";
+		alert("Votre numéro de téléphone ne doit comprendre que des chiffres");
+	}
+	if (error == false )
+	{
+		document.querySelector('[id^="tel_"]').style.border = "1px solid #CCC";
+		document.querySelector('[id^="tel_"]').style.boxShadow = "initial";
+	}
+	
+	
 	if ( error == true )
 	{
 		alert("Champ(s) non rempli(s) ou incorrect(s)");
